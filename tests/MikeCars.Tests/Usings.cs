@@ -1,0 +1,11 @@
+global using Xunit;
+global using Moq;
+global using MikeCars.Domain.Enums;
+global using MikeCars.Domain.Interfaces.Repositories;
+global using MikeCars.Domain.ValueObjects;
+global using MikeCars.Domain.Entities;
+global using MikeCars.Domain.Services;
+global using FluentResults;
+global using MikeCars.Tests.Utils;
+global using Microsoft.Extensions.Configuration;
+global using MikeCars.Domain.Extentions;
