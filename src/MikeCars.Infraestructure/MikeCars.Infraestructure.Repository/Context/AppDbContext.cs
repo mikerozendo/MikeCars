@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MikeCars.Dto.Repository.Models;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MikeCars.Infraestructure.Repository.Context;
 
@@ -333,5 +332,32 @@ public class AppDbContext : DbContext
         //    .OnDelete(DeleteBehavior.Cascade);
         #endregion
 
+        #region RepresentanteModel
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .ToTable("t-representante");
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasKey(x => x.Id)
+            .HasName("pk-representante");
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasIndex(x => x.Id)
+            .HasDatabaseName("idx-id")
+            .IsUnique();
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .Property(x => x.Id)
+            .HasColumnName("id")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasOne(x => x.PessoaJuridicaModel)
+            .WithOne(x => x.RepresentanteModel)
+            .HasForeignKey<RepresentanteModel>(x => x.PessoaJuridicaModel.Id)
+            .HasConstraintName("fk-pessoa-juridica")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        #endregion
     }
 }
