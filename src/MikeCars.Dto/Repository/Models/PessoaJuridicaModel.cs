@@ -9,4 +9,6 @@ public class PessoaJuridicaModel : Base
     public int IdPessoaRepresentanteModel { get; set; }
     public AgenteModel AgenteModel { get; set; }
     public int IdAgenteModel { get; set; }
+    public DocumentoModel DocumentoModel { get; set; }
+    public int DocumentoModelId { get; set; }
 }
