@@ -14,6 +14,6 @@ public class PessoaJuridica : Agente
             string documentoEmpresa,
             EnumTipoAgente tipoAgente) : base(tipoAgente, EnumTipoDocumento.CNPJ, documentoEmpresa)
     {
-        Representante = new(documentoRepresentante);
+        Representante = new(documentoRepresentante, documentoEmpresa, EnumTipoAgente.Representante);
     }
 }
