@@ -343,8 +343,16 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<RepresentanteModel>()
             .HasIndex(x => x.Id)
-            .HasDatabaseName("idx-id")
+            .HasDatabaseName("idx-representante")
             .IsUnique();
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasIndex(x => x.PessoaJuridicaModelId)
+            .HasDatabaseName("idx-representante-pessoa-juridica-id");
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasIndex(x => x.PessoaFisicaModelId)
+            .HasDatabaseName("idx-representante-pessoa-fisica-id");
 
         modelBuilder.Entity<RepresentanteModel>()
             .Property(x => x.Id)
@@ -352,10 +360,27 @@ public class AppDbContext : DbContext
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<RepresentanteModel>()
+            .Property(x => x.PessoaFisicaModelId)
+            .HasColumnName("id-pessoa-fisica")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .Property(x => x.PessoaJuridicaModelId)
+            .HasColumnName("id-pessoa-juridica")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<RepresentanteModel>()
             .HasOne(x => x.PessoaJuridicaModel)
             .WithOne(x => x.RepresentanteModel)
             .HasForeignKey<RepresentanteModel>(x => x.PessoaJuridicaModel.Id)
             .HasConstraintName("fk-pessoa-juridica")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<RepresentanteModel>()
+            .HasOne(x => x.PessoaFisicaModel)
+            .WithOne()
+            .HasForeignKey<RepresentanteModel>(x => x.PessoaFisicaModel.Id)
+            .HasConstraintName("fk-pessoa-fisica")
             .OnDelete(DeleteBehavior.Cascade);
 
         #endregion

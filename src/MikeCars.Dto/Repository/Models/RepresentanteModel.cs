@@ -1,7 +1,11 @@
 ﻿namespace MikeCars.Dto.Repository.Models;
 
-public class RepresentanteModel : PessoaFisicaModel
+public class RepresentanteModel : Base
 {
-    public int EmpresaId { get; set; }
+    public int PessoaJuridicaModelId { get; set; }
     public PessoaJuridicaModel PessoaJuridicaModel { get; set; }
+
+    public int PessoaFisicaModelId { get; set; }
+
+    public PessoaFisicaModel PessoaFisicaModel { get; set; }
 }
