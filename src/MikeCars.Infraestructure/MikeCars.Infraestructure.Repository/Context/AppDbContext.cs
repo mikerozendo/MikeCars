@@ -237,7 +237,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<EnderecoModel>()
             .HasOne(x => x.AgenteModel)
             .WithOne(x => x.EnderecoModel)
-            .HasForeignKey<AgenteModel>(x => x.IdEnderecoModel)
+            .HasForeignKey<AgenteModel>(x => x.Id)
             .HasConstraintName("fk-contato-info")
             .OnDelete(DeleteBehavior.Cascade);
         #endregion
