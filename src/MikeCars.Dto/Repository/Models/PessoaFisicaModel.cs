@@ -1,9 +1,7 @@
 ﻿namespace MikeCars.Dto.Repository.Models;
 
-public class PessoaFisicaModel : Base
+public class PessoaFisicaModel : AgenteModel
 {
     public string Nome { get; set; }
     public DateTime Nascimento { get; set; }
-    public AgenteModel AgenteModel { get; set; }
-    public int IdAgenteModel { get; set; }
 }

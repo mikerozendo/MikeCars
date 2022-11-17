@@ -4,5 +4,11 @@ namespace MikeCars.Domain.Entities;
 
 public sealed class Representante : PessoaFisica
 {
-    public Representante(string numeroDocumento) : base(EnumTipoAgente.Representante, EnumTipoDocumento.CPF, numeroDocumento) { }
+    public PessoaJuridica Empresa { get; set; }
+
+    public Representante(string documentoRepresentante, string documentoEmpresa, EnumTipoAgente tipoAgenteEmpresa)
+        : base(EnumTipoAgente.Representante, EnumTipoDocumento.CPF, documentoRepresentante)
+    {
+        Empresa = new(documentoRepresentante, documentoEmpresa, tipoAgenteEmpresa);
+    }
 }

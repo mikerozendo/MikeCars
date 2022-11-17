@@ -3,6 +3,7 @@
 public class AgenteModel : Base
 {
     public int IdTipoAgente { get; set; }
+
     public EnderecoModel EnderecoModel { get; set; }
     public int IdEnderecoModel { get; set; }
 
