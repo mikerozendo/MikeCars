@@ -290,7 +290,6 @@ public class AppDbContext : DbContext
             .HasKey(x => x.Id)
             .HasName("pk-pessoa-juridica");
 
-
         modelBuilder.Entity<PessoaJuridicaModel>()
             .Property(x => x.Id)
             .HasColumnType("int")
@@ -317,19 +316,20 @@ public class AppDbContext : DbContext
             .HasMaxLength(225)
             .IsRequired();
 
-        //modelBuilder.Entity<PessoaJuridicaModel>()
-        //    .HasOne(x => x.AgenteModel)
-        //    .WithOne()
-        //    .HasForeignKey<PessoaJuridicaModel>(x => x.Id)
-        //    .HasConstraintName("fk-agente")
-        //    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<PessoaJuridicaModel>()
+            .HasOne(x => x.AgenteModel)
+            .WithOne()
+            .HasForeignKey<AgenteModel>(x => x.Id)
+            .HasConstraintName("fk-agente")
+            .OnDelete(DeleteBehavior.Cascade);
 
-        //modelBuilder.Entity<PessoaJuridicaModel>()
-        //    .HasOne(x => x.Representante)
-        //    .WithOne(x => x.PessoaJuridicaModel)
-        //    .HasForeignKey<RepresentanteModel>(x => x.EmpresaId)
-        //    .HasConstraintName("fk-representante")
-        //    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<PessoaJuridicaModel>()
+            .HasOne(x => x.RepresentanteModel)
+            .WithOne(x => x.PessoaJuridicaModel)
+            .HasForeignKey<RepresentanteModel>(x => x.Id)
+            .HasConstraintName("fk-representante")
+            .OnDelete(DeleteBehavior.Cascade);
+
         #endregion
 
         #region RepresentanteModel
