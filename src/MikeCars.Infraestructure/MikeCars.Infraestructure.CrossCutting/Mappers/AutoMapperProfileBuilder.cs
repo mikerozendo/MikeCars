@@ -19,47 +19,51 @@ public class AutoMapperProfileBuilder : Profile
         return new(cfg =>
         {
             cfg.CreateMap<Representante, RepresentanteModel>()
-                .ForMember(x => x.PessoaFisicaModel.IdTipoAgente, y => y.MapFrom(y => (int)y.EnumTipoAgente))
-                .ForMember(x => x.PessoaFisicaModel.Nome, y => y.MapFrom(x => String.Concat(x.Nome, " ", x.Sobrenome)))
-                .ForMember(x => x.PessoaFisicaModel.EnderecoModel, y => y.MapFrom(x => x.Endereco))
-                .ForMember(x => x.PessoaFisicaModel.ContatoInfoModel, y => y.MapFrom(x => x.ContatoInfo))
-                .ForMember(x => x.PessoaFisicaModel.DocumentoModel, y => y.MapFrom(x => x.Documento))
-                .ForMember(x => x.PessoaJuridicaModel, y => y.MapFrom(x => x.Empresa))
-                .ForMember(x => x.PessoaFisicaModel.IdContatoInfoModel, y => y.Ignore())
-                .ForMember(x => x.PessoaFisicaModel.IdDocumentoModel, y => y.Ignore())
-                .ForMember(x => x.PessoaFisicaModel.IdEnderecoModel, y => y.Ignore());
+                .ForMember(x => x.PessoaJuridicaModelId, y => y.Ignore())
+                .ForMember(x => x.PessoaFisicaModel, y => y.Ignore())
+                .ForMember(x => x.PessoaFisicaModelId, y => y.Ignore())
+                .ForMember(x => x.Id, y => y.Ignore())
+                .ForMember(x => x.PessoaJuridicaModel, y => y.MapFrom(x => x.Empresa));
 
             cfg.CreateMap<RepresentanteModel, Representante>()
-                .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => (EnumTipoAgente)y.PessoaFisicaModel.IdTipoAgente))
                 .ForMember(x => x.Nome, y => y.MapFrom(x => x.PessoaFisicaModel.Nome.Substring(0, x.PessoaFisicaModel.Nome.Split(' ', StringSplitOptions.None)[0].Length).Trim()))
                 .ForMember(x => x.Sobrenome, y => y.MapFrom(x => x.PessoaFisicaModel.Nome.Substring(x.PessoaFisicaModel.Nome.Split(' ', StringSplitOptions.None)[0].Length).Trim()))
                 .ForMember(x => x.Endereco, y => y.MapFrom(x => x.PessoaFisicaModel.EnderecoModel))
                 .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.PessoaFisicaModel.ContatoInfoModel))
                 .ForMember(x => x.Documento, y => y.MapFrom(x => x.PessoaFisicaModel.DocumentoModel))
-                .ForMember(x => x.Empresa, y => y.Ignore())
+                .ForMember(x => x.Empresa, y => y.MapFrom(x => x.PessoaJuridicaModel))
+                .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.PessoaFisicaModel.IdTipoAgente))
+                .ForMember(x => x.Nascimento, y => y.MapFrom(y => y.PessoaFisicaModel.Nascimento))
                 .ConstructUsing(x => new(x.PessoaFisicaModel.DocumentoModel.Numero,
                                 x.PessoaJuridicaModel.DocumentoModel.Numero,
                                 (EnumTipoAgente)x.PessoaJuridicaModel.AgenteModel.IdTipoAgente));
 
+            cfg.CreateMap<PessoaFisica, PessoaFisicaModel>()
+                .ForMember(x => x.IdTipoAgente, y => y.MapFrom(y => (int)y.EnumTipoAgente))
+                .ForMember(x => x.Nome, y => y.MapFrom(x => String.Concat(x.Nome, " ", x.Sobrenome)))
+                .ForMember(x => x.EnderecoModel, y => y.MapFrom(x => x.Endereco))
+                .ForMember(x => x.ContatoInfoModel, y => y.MapFrom(x => x.ContatoInfo))
+                .ForMember(x => x.DocumentoModel, y => y.MapFrom(x => x.Documento))
+                .ForMember(x => x.IdContatoInfoModel, y => y.Ignore())
+                .ForMember(x => x.IdDocumentoModel, y => y.Ignore())
+                .ForMember(x => x.IdEnderecoModel, y => y.Ignore()).DisableCtorValidation();
+
             cfg.CreateMap<PessoaFisicaModel, PessoaFisica>()
-                //.ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.IdTipoAgente))
+                .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.IdTipoAgente))
                 .ForMember(x => x.Nome, y => y.MapFrom(x => x.Nome.Substring(0, x.Nome.Split(' ', StringSplitOptions.None)[0].Length).Trim()))
                 .ForMember(x => x.Sobrenome, y => y.MapFrom(x => x.Nome.Substring(x.Nome.Split(' ', StringSplitOptions.None)[0].Length).Trim()))
-                //.ForMember(x => x.Endereco, y => y.MapFrom(x => x.Endereco))
-                //.ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.ContatoInfo))
-                //.ForMember(x => x.Documento, y => y.MapFrom(x => x.Documento))
-                .ConstructUsing(x => new PessoaFisica((EnumTipoAgente)x.AgenteModel.IdTipoAgente, (EnumTipoDocumento)x.AgenteModel.DocumentoModel.IdTipoDocumento, x.AgenteModel.DocumentoModel.Numero.GetCpfUnformattedValue()));
+                .ForMember(x => x.Endereco, y => y.MapFrom(x => x.EnderecoModel))
+                .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.ContatoInfoModel))
+                .ForMember(x => x.Documento, y => y.MapFrom(x => x.DocumentoModel)).DisableCtorValidation();
 
             cfg.CreateMap<PessoaJuridica, PessoaJuridicaModel>()
-                .ForMember(x => x.AgenteModel.IdTipoAgente, y => y.MapFrom(y => (int)y.EnumTipoAgente))
                 .ForMember(x => x.RepresentanteModel, y => y.MapFrom(x => x.Representante))
-                .ForMember(x => x.AgenteModel.EnderecoModel, y => y.MapFrom(x => x.Endereco))
-                .ForMember(x => x.AgenteModel.DocumentoModel, y => y.MapFrom(x => x.Documento))
-                .ForMember(x => x.AgenteModel.ContatoInfoModel, y => y.MapFrom(x => x.ContatoInfo))
-                .ForMember(x => x.AgenteModel.IdContatoInfoModel, y => y.Ignore())
-                .ForMember(x => x.AgenteModel.IdDocumentoModel, y => y.Ignore())
-                .ForMember(x => x.AgenteModel.IdEnderecoModel, y => y.Ignore())
-                //.ForMember(x => x.AgenteModel.IdPessoaRepresentanteModel, y => y.Ignore())
+                .ForMember(x => x.IdAgenteModel, y => y.Ignore())
+                .ForMember(x => x.IdPessoaRepresentanteModel, y => y.Ignore())
+                .ForMember(x => x.DocumentoModelId, y => y.Ignore())
+                .ForMember(x => x.AgenteModel, y => y.Ignore())
+                .ForMember(x => x.DocumentoModel, y => y.Ignore())
+                .ForMember(x => x.RepresentanteModel, y => y.Ignore())
                 .DisableCtorValidation();
 
             cfg.CreateMap<PessoaJuridicaModel, PessoaJuridica>()
@@ -68,8 +72,19 @@ public class AutoMapperProfileBuilder : Profile
                 .ForMember(x => x.Endereco, y => y.MapFrom(x => x.AgenteModel.EnderecoModel))
                 .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.AgenteModel.ContatoInfoModel))
                 .ForMember(x => x.Documento, y => y.MapFrom(x => x.DocumentoModel))
-                .ConstructUsing(x => new(x.RepresentanteModel.PessoaFisicaModel.DocumentoModel.Numero.GetCpfUnformattedValue(), 
+                .ConstructUsing(x => new(x.RepresentanteModel.PessoaFisicaModel.DocumentoModel.Numero.GetCpfUnformattedValue(),
                                 x.DocumentoModel.Numero.GetCnpjUnformattedValue(), (EnumTipoAgente)x.AgenteModel.IdTipoAgente));
+
+
+            cfg.CreateMap<Agente, AgenteModel>()
+                .ForMember(x => x.EnderecoModel, y => y.MapFrom(x => x.Endereco))
+                .ForMember(x => x.IdTipoAgente, y => y.MapFrom(x => (int)x.EnumTipoAgente))
+                .ForMember(x => x.DocumentoModel, y => y.MapFrom(x => x.Documento))
+                .ForMember(x => x.ContatoInfoModel, y => y.MapFrom(x => x.ContatoInfo))
+                .ForMember(x => x.IdContatoInfoModel, y => y.Ignore())
+                .ForMember(x => x.IdDocumentoModel, y => y.Ignore())
+                .ForMember(x => x.IdEnderecoModel, y => y.Ignore())
+                .ReverseMap();
 
             cfg.CreateMap<ContatoInfo, ContatoInfoModel>()
                 .ForMember(x => x.IdAgente, y => y.Ignore())
