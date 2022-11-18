@@ -94,7 +94,7 @@
 //                Cidade = "São Paulo",
 //                Numero = "123 BL A"
 //            },
-//            Representante = new(CpfValidoUserSecret)
+//            Representante = new(CpfValidoUserSecret, 44436599000186"44436599000186", EnumTipoAgente.Fornecedor)
 //            {
 //                ContatoInfo = new()
 //                {

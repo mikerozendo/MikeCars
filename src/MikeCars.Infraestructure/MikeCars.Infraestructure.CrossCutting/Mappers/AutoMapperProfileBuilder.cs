@@ -34,9 +34,7 @@ public class AutoMapperProfileBuilder : Profile
                 .ForMember(x => x.Empresa, y => y.MapFrom(x => x.PessoaJuridicaModel))
                 .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.PessoaFisicaModel.IdTipoAgente))
                 .ForMember(x => x.Nascimento, y => y.MapFrom(y => y.PessoaFisicaModel.Nascimento))
-                .ConstructUsing(x => new(x.PessoaFisicaModel.DocumentoModel.Numero,
-                                x.PessoaJuridicaModel.DocumentoModel.Numero,
-                                (EnumTipoAgente)x.PessoaJuridicaModel.AgenteModel.IdTipoAgente));
+                .ConstructUsing(x => new(x.PessoaFisicaModel.DocumentoModel.Numero.GetCpfUnformattedValue()));
 
             cfg.CreateMap<PessoaFisica, PessoaFisicaModel>()
                 .ForMember(x => x.IdTipoAgente, y => y.MapFrom(y => (int)y.EnumTipoAgente))
@@ -72,8 +70,7 @@ public class AutoMapperProfileBuilder : Profile
                 .ForMember(x => x.Endereco, y => y.MapFrom(x => x.AgenteModel.EnderecoModel))
                 .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.AgenteModel.ContatoInfoModel))
                 .ForMember(x => x.Documento, y => y.MapFrom(x => x.DocumentoModel))
-                .ConstructUsing(x => new(x.RepresentanteModel.PessoaFisicaModel.DocumentoModel.Numero.GetCpfUnformattedValue(),
-                                x.DocumentoModel.Numero.GetCnpjUnformattedValue(), (EnumTipoAgente)x.AgenteModel.IdTipoAgente));
+                .ConstructUsing(x => new(x.DocumentoModel.Numero.GetCnpjUnformattedValue(), (EnumTipoAgente)x.AgenteModel.IdTipoAgente));
 
 
             cfg.CreateMap<Agente, AgenteModel>()

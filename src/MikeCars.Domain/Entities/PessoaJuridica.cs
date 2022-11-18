@@ -9,11 +9,6 @@ public class PessoaJuridica : Agente
     public string NomeFantasia { get; set; }
     public DateTime Abertura { get; set; }
 
-    public PessoaJuridica(
-            string documentoRepresentante,
-            string documentoEmpresa,
-            EnumTipoAgente tipoAgente) : base(tipoAgente, EnumTipoDocumento.CNPJ, documentoEmpresa)
-    {
-        Representante = new(documentoRepresentante, documentoEmpresa, EnumTipoAgente.Representante);
-    }
+    public PessoaJuridica(string documentoEmpresa, EnumTipoAgente tipoAgente)
+        : base(tipoAgente, EnumTipoDocumento.CNPJ, documentoEmpresa) { }
 }
