@@ -150,25 +150,4 @@ public class PessoaJuridicaTests
             },
         };
     }
-
-    //private PessoaFISICA ObterPessoaMockSucesso()
-    //{
-    //    return new(EnumTipoAgente.Representante, CpfValidoUserSecret)
-    //    {
-    //        Nome = "Michael",
-    //        Sobrenome = "Rozendo",
-    //        ContatoInfo = new()
-    //        {
-    //            Email = "mikerozendo@gmail.com",
-    //            TelefoneCelular = "11 9 4912-6483"
-    //        },
-    //        Endereco = new(EnumTipoEndereco.Residencial, EnumUf.SP)
-    //        {
-    //            Logradouro = "Rua",
-    //            Bairro = "Campo Limpo",
-    //            Cidade = "São Paulo",
-    //            Numero = "123 BL A"
-    //        }
-    //    };
-    //}
 }
