@@ -39,11 +39,13 @@ public class AutoMapperProfileBuilder : Profile
                 .ForMember(x => x.AgenteModel, y => y.Ignore())
                 .ForMember(x => x.IdAgente, y => y.Ignore())
                 .ForMember(x => x.Uf, y => y.MapFrom(y => Enum.GetName(typeof(EnumUf), y.EnumUf)))
+                .ForMember(x => x.Cidade, y => y.MapFrom(x => x.Cidade))
                 .DisableCtorValidation();
 
             cfg.CreateMap<EnderecoModel, Endereco>()
                 .ForMember(x => x.EnumTipoEndereco, y => y.MapFrom(y => y.IdTipoEndereco))
                 .ForMember(x => x.EnumUf, y => y.MapFrom(x => (EnumUf)Enum.Parse(typeof(EnumUf), x.Uf)))
+                .ForMember(x => x.Cidade, y => y.MapFrom(x => x.Cidade))
                 .DisableCtorValidation();
 
             cfg.CreateMap<Documento, DocumentoModel>()
@@ -78,21 +80,21 @@ public class AutoMapperProfileBuilder : Profile
                 .ForMember(x => x.Documento, y => y.MapFrom(x => x.DocumentoModel)).DisableCtorValidation();
 
             cfg.CreateMap<Representante, RepresentanteModel>()
-
                 .ForMember(x => x.PessoaJuridicaModelId, y => y.Ignore())
-                .ForMember(x => x.PessoaFisicaModel, y => y.MapFrom(
-                    x => new PessoaFisicaModel()
-                    {
-                        Nascimento = x.Nascimento,
-                        Nome = x.Nome                  
-                    }))
-                .ForMember(x => x.PessoaFisicaModel.ContatoInfoModel, y => y.MapFrom(
-                    x => new ContatoInfoModel()
-                    {
-                        Email = x.ContatoInfo.Email,
-                        TelefoneCelular = x.ContatoInfo.TelefoneCelular,
-                        TelefoneResidencial = x.ContatoInfo.TelefoneCelular
-                    }))
+                .ForPath(x => x.PessoaFisicaModel.Nascimento, y => y.MapFrom(x => x.Nascimento))
+                .ForPath(x => x.PessoaFisicaModel.Nome, y =>y.MapFrom(x => String.Concat(x.Nome, " ", x.Sobrenome)))
+                .ForPath(x => x.PessoaFisicaModel.IdTipoAgente, y =>y.MapFrom(x => (int)x.EnumTipoAgente))
+                .ForPath(x => x.PessoaFisicaModel.ContatoInfoModel.Email, y =>y.MapFrom(x => x.ContatoInfo.Email))
+                .ForPath(x => x.PessoaFisicaModel.ContatoInfoModel.TelefoneCelular, y =>y.MapFrom(x => x.ContatoInfo.TelefoneCelular))
+                .ForPath(x => x.PessoaFisicaModel.ContatoInfoModel.TelefoneResidencial, y =>y.MapFrom(x => x.ContatoInfo.TelefoneResidencial))
+                .ForPath(x => x.PessoaFisicaModel.DocumentoModel.Numero, y =>y.MapFrom(x => x.Documento.Numero))
+                .ForPath(x => x.PessoaFisicaModel.DocumentoModel.IdTipoDocumento, y =>y.MapFrom(x => (int)x.Documento.EnumTipoDocumento))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.Logradouro, y =>y.MapFrom(x => x.Endereco.Logradouro))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.Numero, y =>y.MapFrom(x => x.Endereco.Numero))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.Bairro, y =>y.MapFrom(x => x.Endereco.Bairro))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.Cidade, y =>y.MapFrom(x => x.Endereco.Cidade))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.Uf, y =>y.MapFrom(x => x.Endereco.EnumUf.ToString()))
+                .ForPath(x => x.PessoaFisicaModel.EnderecoModel.IdTipoEndereco, y =>y.MapFrom(x => (int)x.Endereco.EnumTipoEndereco))
                 .ForMember(x => x.PessoaFisicaModelId, y => y.Ignore())
                 .ForMember(x => x.Id, y => y.Ignore())
                 .ForMember(x => x.PessoaJuridicaModel, y => y.MapFrom(x => x.Empresa));
@@ -110,21 +112,24 @@ public class AutoMapperProfileBuilder : Profile
 
             cfg.CreateMap<PessoaJuridica, PessoaJuridicaModel>()
                 .ForMember(x => x.RepresentanteModel, y => y.MapFrom(x => x.Representante))
-                .ForMember(x => x.IdAgenteModel, y => y.Ignore())
+                .ForMember(x => x.IdTipoAgente, y => y.MapFrom(x => (int)x.EnumTipoAgente))
                 .ForMember(x => x.IdPessoaRepresentanteModel, y => y.Ignore())
-                .ForMember(x => x.DocumentoModelId, y => y.Ignore())
-                .ForMember(x => x.AgenteModel, y => y.Ignore())
-                .ForMember(x => x.DocumentoModel, y => y.Ignore())
-                .ForMember(x => x.RepresentanteModel, y => y.Ignore())
+                .ForMember(x => x.IdEnderecoModel, y => y.Ignore())
+                .ForMember(x => x.IdContatoInfoModel, y => y.Ignore())
+                .ForMember(x => x.IdDocumentoModel, y => y.Ignore())
+                .ForMember(x => x.DocumentoModel, y => y.MapFrom(x => x.Documento))
+                .ForMember(x => x.RepresentanteModel, y => y.MapFrom(x => x.Representante))
+                .ForMember(x => x.EnderecoModel, y => y.MapFrom(x => x.Endereco))
+                .ForMember(x => x.ContatoInfoModel, y => y.MapFrom(x => x.ContatoInfo))
                 .DisableCtorValidation();
 
             cfg.CreateMap<PessoaJuridicaModel, PessoaJuridica>()
-                .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.AgenteModel.IdTipoAgente))
+                .ForMember(x => x.EnumTipoAgente, y => y.MapFrom(y => y.IdTipoAgente))
                 .ForMember(x => x.Representante, y => y.MapFrom(x => x.RepresentanteModel))
-                .ForMember(x => x.Endereco, y => y.MapFrom(x => x.AgenteModel.EnderecoModel))
-                .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.AgenteModel.ContatoInfoModel))
+                .ForMember(x => x.Endereco, y => y.MapFrom(x => x.EnderecoModel))
+                .ForMember(x => x.ContatoInfo, y => y.MapFrom(x => x.ContatoInfoModel))
                 .ForMember(x => x.Documento, y => y.MapFrom(x => x.DocumentoModel))
-                .ConstructUsing(x => new(x.DocumentoModel.Numero.GetCnpjUnformattedValue(), (EnumTipoAgente)x.AgenteModel.IdTipoAgente));
+                .ConstructUsing(x => new(x.DocumentoModel.Numero.GetCnpjUnformattedValue(), (EnumTipoAgente)x.IdTipoAgente));
         });
     }
 }

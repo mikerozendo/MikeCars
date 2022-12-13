@@ -316,12 +316,12 @@ public class AppDbContext : DbContext
             .HasMaxLength(225)
             .IsRequired();
 
-        modelBuilder.Entity<PessoaJuridicaModel>()
-            .HasOne(x => x.AgenteModel)
-            .WithOne()
-            .HasForeignKey<AgenteModel>(x => x.Id)
-            .HasConstraintName("fk-agente")
-            .OnDelete(DeleteBehavior.Cascade);
+        //modelBuilder.Entity<PessoaJuridicaModel>()
+        //    .HasOne(x => x.AgenteModel)
+        //    .WithOne()
+        //    .HasForeignKey<AgenteModel>(x => x.Id)
+        //    .HasConstraintName("fk-agente")
+        //    .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<PessoaJuridicaModel>()
             .HasOne(x => x.RepresentanteModel)

@@ -12,3 +12,4 @@ public class AutoMapperConfigTests
         configuration.AssertConfigurationIsValid();
     }
 }
+   

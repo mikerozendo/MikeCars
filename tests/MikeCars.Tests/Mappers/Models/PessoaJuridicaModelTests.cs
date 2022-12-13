@@ -62,15 +62,15 @@ public class PessoaJuridicaModelTests
         Assert.Equal("44436599000186", model.DocumentoModel.Numero);
         Assert.Equal("MR", model.RazaoSocial);
         Assert.Equal("MR", model.RazaoSocial);
-        Assert.Equal("mikerozendo@gmail.com", model.AgenteModel.ContatoInfoModel.Email);
-        Assert.Equal("11949126483", model.AgenteModel.ContatoInfoModel.TelefoneCelular);
-        Assert.True(string.IsNullOrEmpty(model.AgenteModel.ContatoInfoModel.TelefoneResidencial));
-        Assert.Equal("Rua", model.AgenteModel.EnderecoModel.Logradouro);
-        Assert.Equal("Campo Limpo", model.AgenteModel.EnderecoModel.Bairro);
-        Assert.Equal("São Paulo", model.AgenteModel.EnderecoModel.Cidade);
-        Assert.Equal("123 BL A", model.AgenteModel.EnderecoModel.Numero);
-        Assert.Equal(2, model.AgenteModel.EnderecoModel.IdTipoEndereco);
-        Assert.Equal(EnumUf.SP.ToString(), model.AgenteModel.EnderecoModel.Uf);
+        Assert.Equal("mikerozendo@gmail.com", model.ContatoInfoModel.Email);
+        Assert.Equal("11949126483", model.ContatoInfoModel.TelefoneCelular);
+        Assert.True(string.IsNullOrEmpty(model.ContatoInfoModel.TelefoneResidencial));
+        Assert.Equal("Rua", model.EnderecoModel.Logradouro);
+        Assert.Equal("Campo Limpo", model.EnderecoModel.Bairro);
+        Assert.Equal("São Paulo", model.EnderecoModel.Cidade);
+        Assert.Equal("123 BL A", model.EnderecoModel.Numero);
+        Assert.Equal(2, model.EnderecoModel.IdTipoEndereco);
+        Assert.Equal(EnumUf.SP.ToString(), model.EnderecoModel.Uf);
         Assert.Equal(CpfValidoUserSecret, model.RepresentanteModel.PessoaFisicaModel.DocumentoModel.Numero);
         Assert.Equal("mikerozendo@gmail.com", model.RepresentanteModel.PessoaFisicaModel.ContatoInfoModel.Email);
         Assert.Equal("11949126483", model.RepresentanteModel.PessoaFisicaModel.ContatoInfoModel.TelefoneCelular);
@@ -92,24 +92,21 @@ public class PessoaJuridicaModelTests
             Abertura = new(2021, 10, 10),
             RazaoSocial = "MR",
             NomeFantasia = "MR",
-            AgenteModel = new()
+            IdTipoAgente = (int)EnumTipoAgente.Fornecedor,
+            ContatoInfoModel = new()
             {
-                IdTipoAgente = (int)EnumTipoAgente.Fornecedor,
-                ContatoInfoModel = new()
-                {
-                    Email = "mikerozendo@gmail.com",
-                    TelefoneCelular = "11949126483",
-                },
-                EnderecoModel = new()
-                {
-                    Id = 2,
-                    IdTipoEndereco = 2, //comercial
-                    Uf = EnumUf.SP.ToString(),
-                    Logradouro = "Rua",
-                    Bairro = "Campo Limpo",
-                    Cidade = "São Paulo",
-                    Numero = "123 BL A"
-                },
+                Email = "mikerozendo@gmail.com",
+                TelefoneCelular = "11949126483",
+            },
+            EnderecoModel = new()
+            {
+                Id = 2,
+                IdTipoEndereco = 2, //comercial
+                Uf = EnumUf.SP.ToString(),
+                Logradouro = "Rua",
+                Bairro = "Campo Limpo",
+                Cidade = "São Paulo",
+                Numero = "123 BL A"
             },
             DocumentoModel = new DocumentoModel()
             {
@@ -145,7 +142,7 @@ public class PessoaJuridicaModelTests
                         Id = 7,
                         Numero = CpfValidoUserSecret
                     },
-                }          
+                }
             },
         };
 
