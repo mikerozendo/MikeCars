@@ -5,21 +5,15 @@ namespace MikeCars.Domain.Entities;
 public sealed class Vendedor : Funcionario
 {
     public IEnumerable<Venda> Vendas { get; set; } = new List<Venda>();
-    public decimal ComissaoPorVenda { get; set; }
+    public decimal PercentualComissao { get; set; }
     public decimal ComissaoTotal { get; private set; }
-    public decimal SalarioTotal { get; set; }
 
     public Vendedor(string numeroDocumento)
         : base(EnumTipoFuncionario.Vendedor, EnumDepartamentoEmpresa.Comercial, numeroDocumento) { }
 
     public void CalculaComissaoTotal()
     {
-        decimal valorTotalVendas = 0;
-
-        foreach (var item in Vendas)
-        {
-            valorTotalVendas += item.ValorTotal;
-        }
+        decimal valorTotalVendas = Vendas.Sum(x => x.ValorTotal);
 
         if (valorTotalVendas > 0)
         {
@@ -27,12 +21,12 @@ public sealed class Vendedor : Funcionario
         }
         else
         {
-            ComissaoTotal = ComissaoPorVenda * valorTotalVendas / 100;
+            ComissaoTotal = PercentualComissao * valorTotalVendas / 100;
         }
     }
 
     public void CalculaSalarioTotal()
     {
-        Salario = ComissaoTotal;
+        Salario += ComissaoTotal;
     }
 }
