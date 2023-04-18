@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function showInvisibleElements() {
+    let elements = document.querySelectorAll("not-visible");
 
-// Write your JavaScript code.
+    for (i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("not-visible");
+    }
+}
+
+//function showInvisleElementsByStep(inputId) {
+//    let elements = document.getElementById(inputId);
+
+//    let elements = document.querySelectorAll("not-visible");
+
+//    for (i = 0; i < elements.length; i++) {
+//        elements[i].classList.remove("not-visible");
+//    }
+//}

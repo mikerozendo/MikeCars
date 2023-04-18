@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikeCars.Dto.Dto;
-
-public class BaseViewModel 
+namespace MikeCars.Domain.Services
 {
-    public int Id { get; set; }
+    internal class EmployeeService
+    {
+    }
 }

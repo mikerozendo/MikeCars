@@ -5,7 +5,7 @@ using MikeCars.Domain.ValueObjects;
 using MikeCars.Dto.Models;
 using MikeCars.Infraestructure.Repository.Context;
 
-namespace MikeCars.Infraestructure.Repository.Repositories;
+namespace MikeCars.Infraestructure.Repository.Repositories.Internal;
 
 public class DocumentoRepository : IDocumentoRepository
 {

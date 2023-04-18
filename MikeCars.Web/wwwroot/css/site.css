@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.not-visible {
+    display: none;
+}
+
+.still-not-visible {
+    display: none;
+}

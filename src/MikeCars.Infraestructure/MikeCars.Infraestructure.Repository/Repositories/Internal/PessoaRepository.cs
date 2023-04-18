@@ -5,7 +5,7 @@ using AutoMapper;
 using MikeCars.Infraestructure.Repository.Context;
 using MikeCars.Dto.Models;
 
-namespace MikeCars.Infraestructure.Repository;
+namespace MikeCars.Infraestructure.Repository.Repositories.Internal;
 
 public class PessoaRepository : IPessoaFisicaRepository
 {

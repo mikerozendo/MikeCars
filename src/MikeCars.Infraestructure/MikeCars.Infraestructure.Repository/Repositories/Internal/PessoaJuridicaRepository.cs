@@ -5,7 +5,7 @@ using MikeCars.Domain.Interfaces.Repositories;
 using MikeCars.Dto.Models;
 using MikeCars.Infraestructure.Repository.Context;
 
-namespace MikeCars.Infraestructure.Repository.Repositories;
+namespace MikeCars.Infraestructure.Repository.Repositories.Internal;
 
 public class PessoaJuridicaRepository : IPessoaJuridicaRepository
 {

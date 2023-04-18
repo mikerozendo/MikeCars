@@ -1,0 +1,148 @@
+﻿<fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">1 - Personal Information</legend>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">CPF / CNPJ</span>
+                </div>
+                <input id="documentNumber" type="text" class="form-control" onblur='enterDigits()' placeholder="Only numbers" required>
+                <span id="warning-document-number" class="text-danger not-visible">*Informe um número de documento válido</span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">First Name</span>
+                </div>
+                <input id="firstName" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Last Name</span>
+                </div>
+                <input id="lastName" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Cellphone</span>
+                </div>
+                <input id="cellphoneNumber" type="text" class="form-control" placeholder="(00) 0 0000-0000">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email</span>
+                </div>
+                <input id="email" type="text" class="form-control" placeholder="email@email.com">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <input id="birthDate" type="date" class="form-control" placeholder="Nascimento">
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">2 - Adress Information</legend>
+    <div class="row mb-4">
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Zip Code</span>
+                </div>
+                <input id="zipcode" type="text" class="form-control" @*onblur="getAdressByZipCode()"*@ placeholder="05772-060">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">State</span>
+                </div>
+                <input id="street" type="text" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">City</span>
+                </div>
+                <input id="street" type="text" class="form-control" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Street</span>
+                </div>
+                <input id="street" type="text" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Neighborhood</span>
+                </div>
+                <input id="neighborhood" type="text" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Number</span>
+                </div>
+                <input id="number" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">Reference</span>
+                </div>
+                <input id="reference" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<script type="text/javascript">
+    function enterDigits() {
+        var documentNumber = document.getElementById("documentNumber").value;
+
+        console.log(documentNumber);
+        if (documentNumber.length == 11) { //CPF
+            documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
+            documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
+            documentNumber = documentNumber.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+
+            document.getElementById("documentNumber").innerText = documentNumber;
+            //showInvisibleElements();
+
+        } else if (documentNumber.length == 14) { //CNPJ
+
+            documentNumber = documentNumber.replace(/^(\d{2})(\d)/, "$1.$2")
+            documentNumber = documentNumber.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+            documentNumber = documentNumber.replace(/\.(\d{3})(\d)/, ".$1/$2")
+            documentNumber = documentNumber.replace(/(\d{4})(\d)/, "$1-$2")
+
+            debugger;
+            document.getElementById("documentNumber").innerText = documentNumber;
+            //showInvisibleElements();
+        } else {
+            let warning = document.getElementById("warning-document-number");
+            warning.classList.remove("not-visible");
+        }
+    }
+</script>
