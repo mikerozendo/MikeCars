@@ -22,7 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\MikeCars.Domain\MikeCars.Domain.csproj" />
-    <ProjectReference Include="..\..\src\MikeCars.Dto\MikeCars.Dto.csproj" />
     <ProjectReference Include="..\..\src\MikeCars.Infraestructure\MikeCars.Infraestructure.CrossCutting\MikeCars.Infraestructure.CrossCutting.csproj" />
   </ItemGroup>
 </Project>

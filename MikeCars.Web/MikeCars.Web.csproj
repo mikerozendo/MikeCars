@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\MikeCars.Application\MikeCars.Application.csproj" />
-    <ProjectReference Include="..\src\MikeCars.Dto\MikeCars.Dto.csproj" />
   </ItemGroup>
 
 </Project>

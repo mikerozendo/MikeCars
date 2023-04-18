@@ -1,4 +1,4 @@
-﻿namespace MikeCars.Dto.ViewModels;
+﻿namespace MikeCars.Application.ViewModels;
 
 public class EmployeeViewModel
 {

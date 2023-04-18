@@ -1,4 +1,4 @@
-﻿using MikeCars.Dto.ViewModels;
+﻿using MikeCars.Application.ViewModels;
 
 namespace MikeCars.Application.Interfaces;
 

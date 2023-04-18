@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MikeCars.Application\MikeCars.Application.csproj" />
     <ProjectReference Include="..\..\MikeCars.Domain\MikeCars.Domain.csproj" />
-    <ProjectReference Include="..\..\MikeCars.Dto\MikeCars.Dto.csproj" />
   </ItemGroup>
 
 </Project>

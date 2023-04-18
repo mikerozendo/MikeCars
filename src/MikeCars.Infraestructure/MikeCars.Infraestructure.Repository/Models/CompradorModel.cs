@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikeCars.Domain.Services
+namespace MikeCars.Infraestructure.Repository.Models;
+internal class CompradorModel
 {
-    internal class EmployeeService
-    {
-    }
 }

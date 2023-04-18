@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MikeCars.Dto.Models;
+using MikeCars.Infraestructure.Repository.Models;
 
 namespace MikeCars.Infraestructure.Repository.Context;
 
