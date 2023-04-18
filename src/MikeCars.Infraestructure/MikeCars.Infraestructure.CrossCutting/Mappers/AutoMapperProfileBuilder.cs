@@ -3,7 +3,7 @@ using MikeCars.Domain.Entities;
 using MikeCars.Domain.Enums;
 using MikeCars.Domain.Extentions;
 using MikeCars.Domain.ValueObjects;
-using MikeCars.Dto.Repository.Models;
+using MikeCars.Dto.Models;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MikeCars.Infraestructure.CrossCutting.Mappers;

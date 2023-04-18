@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikeCars.Dto.Repository.Models
+namespace MikeCars.Dto.Dto;
+
+public class BaseViewModel 
 {
-    internal class CompradorModel
-    {
-    }
+    public int Id { get; set; }
 }

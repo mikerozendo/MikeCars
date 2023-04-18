@@ -2,8 +2,8 @@
 using MikeCars.Domain.Entities;
 using FluentResults;
 using AutoMapper;
-using MikeCars.Dto.Repository.Models;
 using MikeCars.Infraestructure.Repository.Context;
+using MikeCars.Dto.Models;
 
 namespace MikeCars.Infraestructure.Repository;
 

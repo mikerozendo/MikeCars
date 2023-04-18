@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MikeCars.Dto.Repository.Models;
+using MikeCars.Dto.Models;
 using MikeCars.Infraestructure.CrossCutting.Mappers;
 
 namespace MikeCars.Tests.Mappers.Models;

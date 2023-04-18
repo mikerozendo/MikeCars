@@ -2,6 +2,9 @@
   <ItemGroup>
     <ProjectReference Include="..\MikeCars.Domain\MikeCars.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dto\" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

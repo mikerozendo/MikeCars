@@ -2,7 +2,7 @@
 using FluentResults;
 using MikeCars.Domain.Entities;
 using MikeCars.Domain.Interfaces.Repositories;
-using MikeCars.Dto.Repository.Models;
+using MikeCars.Dto.Models;
 using MikeCars.Infraestructure.Repository.Context;
 
 namespace MikeCars.Infraestructure.Repository.Repositories;

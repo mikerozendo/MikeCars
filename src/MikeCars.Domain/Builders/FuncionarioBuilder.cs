@@ -24,8 +24,8 @@ public static class FuncionarioBuilder
         funcionario.Admissao = admissao; return funcionario;
     }
 
-    public static Funcionario WithLastVacation(this Funcionario funcionario, DateTime ultimasFerias)
-    {
-        funcionario.UltimasFerias = ultimasFerias; return funcionario;
-    }
+    //public static Funcionario WithLastVacation(this Funcionario funcionario, DateTime ultimasFerias)
+    //{
+    //    funcionario.UltimasFerias = ultimasFerias; return funcionario;
+    //}
 }

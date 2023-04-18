@@ -1,4 +1,4 @@
-﻿namespace MikeCars.Dto.Repository.Models;
+﻿namespace MikeCars.Dto.Models;
 
 public class FuncionarioModel : Base
 {

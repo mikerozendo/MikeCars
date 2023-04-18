@@ -2,7 +2,7 @@
 
 namespace MikeCars.Domain.Entities;
 
-public class DepartamentoEmpresa
+public class DepartamentoEmpresa : Base
 {
     public string Nome { get; private set; }
     public EnumDepartamentoEmpresa EnumDepartamentoEmpresa { get; set; }

@@ -8,9 +8,7 @@ public abstract class PessoaFisica : Agente
     public string Sobrenome { get; set; }
     public DateTime Nascimento { get; set; }
 
-    public PessoaFisica(EnumTipoAgente enumTipoAgente, EnumTipoDocumento enumTipoDocumento, string numeroDocumento) 
-        : base(enumTipoAgente, enumTipoDocumento, numeroDocumento)
-    {
-    }
+    public PessoaFisica(EnumTipoAgente enumTipoAgente, EnumTipoDocumento enumTipoDocumento, string numeroDocumento)
+        : base(enumTipoAgente, enumTipoDocumento, numeroDocumento) { }
 }
 
