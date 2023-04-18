@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MikeCars.Application\MikeCars.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>

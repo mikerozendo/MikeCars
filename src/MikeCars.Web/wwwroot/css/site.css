@@ -28,3 +28,19 @@ body {
 .text-in-end {
     text-align:right !important;
 }
+
+.img-profile-select {
+    max-height: 106px;
+    width: 130px;
+}
+
+.upload-img-employee {
+    text-align: end;
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+
+.btn-grid {
+    display: grid;
+}
