@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Create Employee";
+}
+<form asp-controller="Employee" asp-action="Create" method="post">
+    <partial name="_EmployeeForm.cshtml">
+        <div class="row">
+            <div class="col-12 g-2">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+</form>
+
