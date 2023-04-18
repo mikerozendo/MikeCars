@@ -24,3 +24,7 @@ body {
 .still-not-visible {
     display: none;
 }
+
+.text-in-end {
+    text-align:right !important;
+}
