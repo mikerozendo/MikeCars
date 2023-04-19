@@ -45,3 +45,17 @@ body {
 .btn-grid {
     display: grid;
 }
+
+.text-center {
+    text-align:center;
+}
+
+.card-fit {
+    width: 45% !important;
+    display: inline-block !important;
+}
+
+.div-multiple-cards {
+    display: flex !important;
+    justify-content: space-between !important;
+}
