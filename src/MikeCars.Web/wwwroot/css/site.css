@@ -30,8 +30,8 @@ body {
 }
 
 .img-profile-select {
-    max-height: 106px;
-    width: 130px;
+    height: 100px !important;
+    width: 130px !important;
 }
 
 .upload-img-employee {
