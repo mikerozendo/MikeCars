@@ -6,7 +6,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="">CPF / CNPJ</span>
                 </div>
-                <input id="documentNumber" type="text" class="form-control" onblur='enterDigits()' placeholder="Only numbers" required>
+                <input id="documentNumber" type="text" class="form-control" @*onblur='enterDigits()'*@ placeholder="Only numbers" required>
                 <span id="warning-document-number" class="text-danger not-visible">*Informe um número de documento válido</span>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Zip Code</span>
                 </div>
-                <input id="zipcode" type="text" class="form-control" @*onblur="getAdressByZipCode()"*@ placeholder="05772-060">
+                <input id="zipcode" type="text" class="form-control" placeholder="05772-060">
             </div>
         </div>
         <div class="col-2">
