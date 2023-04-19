@@ -1,109 +1,129 @@
-﻿<fieldset class="border p-4">
-    <legend class="float-none w-auto p-2">1 - Personal Information</legend>
-    <div class="row">
-        <div class="col-9">
-            <div class="row mb-4">
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Cpf</span>
-                        <input id="DocumentNumber" name="DocumentNumber" type="text" class="form-control" placeholder="Only numbers" aria-label="DocumentNumber">
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">First Name</span>
-                        <input id="FirstName" name="FirstName" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Last Name</span>
-                        <input id="LastName" name="LastName" type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
+﻿<div class="card">
+    <div class="card-body">
+        <fieldset class="border p-4">
+            <legend class="float-none w-auto p-2">1 - Personal Information</legend>
             <div class="row">
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Cellphone</span>
-                        <input id="CellPhone" name="CellPhone" type="text" class="form-control" placeholder="(00) 0 0000-0000">
+                <div class="col-9">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Cpf</span>
+                                <input id="DocumentNumber" name="DocumentNumber" type="text" class="form-control" placeholder="Only numbers" aria-label="DocumentNumber">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">First Name</span>
+                                <input id="FirstName" name="FirstName" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Last Name</span>
+                                <input id="LastName" name="LastName" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Cellphone</span>
+                                <input id="CellPhone" name="CellPhone" type="text" class="form-control" placeholder="(00) 0 0000-0000">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Email</span>
+                                <input id="Email" name="Email" type="text" class="form-control" placeholder="email@email.com">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Birth Date</span>
+                                <input id="BirthDate" name="BirthDate" type="date" class="form-control" placeholder="Nascimento">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Email</span>
-                        <input id="Email" name="Email" type="text" class="form-control" placeholder="email@email.com">
+                <div class="col-3 p-0 m-0">
+                    @*                    <div class="card">
+                    <div class="card-body">
+                    <figure class="figure">
+                    <img src="/Images/default-person-image.jpg" class="figure-img img-fluid rounded img-profile-select" alt="...">
+                    </figure>
+                    <button class="btn btn-outline-primary img-profile-select">Upload</button>
+                    <input class="" id="formFileSm" type="file" hidden>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Birth Date</span>
-                        <input id="BirthDate" name="BirthDate" type="date" class="form-control" placeholder="Nascimento">
+                    </div>*@
+                    <div class="card">
+                        <div class="card-body upload-img-employee">
+                            <img src="/Images/default-person-image.jpg" class="figure-img img-fluid rounded img-profile-select" alt="...">
+                            <button class="btn btn-outline-primary img-profile-select">Upload</button>
+                            <input class="" id="formFileSm" type="file" hidden>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-3 upload-img-employee">
-            <figure class="figure">
-                <img src="/Images/default-person-image.jpg" class="figure-img img-fluid rounded img-profile-select" alt="...">
-            </figure>
-            <button class="btn btn-outline-primary img-profile-select">Upload</button>
-        </div>
+        </fieldset>
     </div>
-</fieldset>
-<fieldset class="border p-4">
-    <legend class="float-none w-auto p-2">2 - Adress Information</legend>
-    <div class="row">
-        <div class="col-12">
-            <div class="row mb-4">
-                <div class="col-2">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Zip Code</span>
-                        <input id="ZipCode" name="ZipCode" type="text" class="form-control" @*onblur="getAdressByZipCode()"*@ placeholder="05772-060">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">State</span>
-                        <input id="State" name="State" type="text" class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">City</span>
-                        <input id="City" name="City" type="text" class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">Street</span>
-                        <input id="Street" name="Street" type="text" class="form-control" disabled>
-                    </div>
-                </div>
-            </div>
+</div>
+<div class="card mt-1">
+    <div class="card-body">
+        <fieldset class="border p-4">
+            <legend class="float-none w-auto p-2">2 - Adress Information</legend>
             <div class="row">
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">Neighborhood</span>
-                        <input id="Neighborhood" name="Neighborhood" type="text" class="form-control" disabled>
+                <div class="col-12">
+                    <div class="row mb-4">
+                        <div class="col-2">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Zip Code</span>
+                                <input id="ZipCode" name="ZipCode" type="text" class="form-control" @*onblur="getAdressByZipCode()"*@ placeholder="05772-060">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">State</span>
+                                <input id="State" name="State" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">City</span>
+                                <input id="City" name="City" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">Street</span>
+                                <input id="Street" name="Street" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">Number</span>
-                        <input id="StreetNumber" name="StreetNumber" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="">Reference</span>
-                        <input id="AdressReferencePoint" name="AdressReferencePoint" type="text" class="form-control">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">Neighborhood</span>
+                                <input id="Neighborhood" name="Neighborhood" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">Number</span>
+                                <input id="StreetNumber" name="StreetNumber" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="">Reference</span>
+                                <input id="AdressReferencePoint" name="AdressReferencePoint" type="text" class="form-control">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </fieldset>
     </div>
-</fieldset>
+</div>
 
 
 <script type="text/javascript">
