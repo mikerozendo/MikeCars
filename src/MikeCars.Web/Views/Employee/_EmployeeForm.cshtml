@@ -1,6 +1,18 @@
 ﻿@using MikeCars.Application.ViewModels.Enums;
 @model MikeCars.Application.ViewModels.EmployeeViewModel;
 
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-absolute top-0 end-0 p-3">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header content-end">
+                <small class="text-muted">just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="toast-body" class="toast-body bg-dark">
+            </div>
+        </div>
+    </div>
+</div>
 <div class="card text-center">
     <div class="card-body">
         <fieldset class="border p-4">
@@ -77,11 +89,6 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Zip Code</span>
                                 <input asp-for="ZipCode" id="ZipCode" name="ZipCode" type="text" class="form-control" placeholder="00000-000" required>
-                                <div id="zip-code-error-containner" class="row not-visible">
-                                    <div class="col-sm">
-                                        <small id="zip-code-error" class="color-red">Please enter a valid zipcode.</small>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-2">
@@ -215,13 +222,8 @@
 <script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function () {
-        buildDynamicTriggers();
+        buildTriggers();
     });
-
-    function buildDynamicTriggers() {
-        triggerBtnUpload();
-        triggerZipCodeBlur();
-    }
 
     function buildTriggers() {
         triggerZipCodeBlur();
@@ -244,6 +246,7 @@
 
     async function getAdressByZipCode(userZipCodeInput) {
         let zipCode = userZipCodeInput.value;
+        clearHtmlAdressInfo();
 
         if (zipCode.length == 8) {
 
@@ -259,15 +262,7 @@
         }
     }
 
-    function showErrorWhenGettingAdressByZipCode() {
-        document.getElementById("zip-code-error-containner").classList.remove("not-visible");
-    }
-
     async function getAdressByZipCodeInViaCep(zipCode) {
-        //let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
-        //var jsonResponse = await response.json();
-        //return jsonResponse;
-
         try {
             let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
             var jsonResponse = await response.json();
@@ -277,7 +272,18 @@
         }
     }
 
+    function showErrorWhenGettingAdressByZipCode() {
+        document.getElementById("toast-body").innerHTML = '';
+        document.getElementById("toast-body").innerHTML += '<span class="text-white bg-dark" id="toast-message">Please, enter a valid zip code.</span>';
+        showToast();
+    }
 
+    function clearHtmlAdressInfo() {
+        document.getElementById("State").value = "";
+        document.getElementById("City").value = "";
+        document.getElementById("Street").value = "";
+        document.getElementById("Neighborhood").value = "";
+    }
 
     function setHtmlAdressInfo(adreessObject) {
         document.getElementById("State").value = adreessObject.uf;
@@ -287,6 +293,7 @@
     }
 
     function enterDocumentDigits() {
+        debugger;
         var documentNumber = document.getElementById("DocumentNumber").value;
 
         if (documentNumber.length == 11) { //CPF
@@ -295,12 +302,16 @@
             documentNumber = documentNumber.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
 
             document.getElementById("DocumentNumber").innerText = documentNumber;
-            showInvisibleElements();
 
         } else {
-            let warning = document.getElementById("document-number-error-containner");
-            warning.classList.remove("not-visible");
+            showErrorWhenInvalidDocumentNumber();
         }
+    }
+
+    function showErrorWhenInvalidDocumentNumber(){
+        document.getElementById("toast-body").innerHTML = '';
+        document.getElementById("toast-body").innerHTML += '<span class="text-white bg-dark" id="toast-message">Please, enter a valid document number.</span>';
+        showToast();
     }
 </script>
 

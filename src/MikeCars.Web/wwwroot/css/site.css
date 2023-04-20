@@ -72,3 +72,7 @@ body {
 .color-red {
     color: red;
 }
+
+.content-end {
+    justify-content: end;
+}
