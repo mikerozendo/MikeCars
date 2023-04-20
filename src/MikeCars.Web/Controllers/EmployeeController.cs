@@ -5,19 +5,12 @@ namespace MikeCars.Web.Controllers;
 
 public class EmployeeController : Controller
 {
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] EmployeeViewModel employee)
-    {
-        await Task.Delay(12);
-        return View();
-    }
-
     public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult Create()
     {
         return View();
     }
@@ -42,12 +35,19 @@ public class EmployeeController : Controller
             StreetNumber = "661",
             TypeEmployeeId = 1,
             DepartmentId = 1,
-            ContractStartDate = new DateTime(1998,03,11),
+            ContractStartDate = new DateTime(1998, 03, 11),
             ZipCode = "05772060",
             SalaryAmount = 9350,
         };
         #endregion
 
         return View(employee);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] EmployeeViewModel employee)
+    {
+        await Task.Delay(12);
+        return View();
     }
 }
