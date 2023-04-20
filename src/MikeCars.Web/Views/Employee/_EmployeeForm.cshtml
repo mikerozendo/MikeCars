@@ -1,4 +1,5 @@
 ﻿@using MikeCars.Application.ViewModels.Enums;
+@model MikeCars.Application.ViewModels.EmployeeViewModel;
 
 <div class="card text-center">
     <div class="card-body">
@@ -9,20 +10,25 @@
                     <div class="row mb-4">
                         <div class="col-4">
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Cpf</span>
-                                <input id="DocumentNumber" name="DocumentNumber" type="text" class="form-control" placeholder="Only numbers" aria-label="DocumentNumber">
+                                <span class="input-group-text">Cpf</span>
+                                <input asp-for="DocumentNumber" id="DocumentNumber" name="DocumentNumber" type="text" class="form-control" placeholder="Only numbers" aria-label="DocumentNumber" required>
+                                <div id="document-number-error-containner" class="row not-visible">
+                                    <div class="col-sm">
+                                        <small id="document-number-error" class="color-red">Please enter a valid document. Cpf has 11 digits.</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">First Name</span>
-                                <input id="FirstName" name="FirstName" type="text" class="form-control">
+                                <input asp-for="FirstName" id="FirstName" name="FirstName" type="text" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Last Name</span>
-                                <input id="LastName" name="LastName" type="text" class="form-control">
+                                <input asp-for="LastName" id="LastName" name="LastName" type="text" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -30,19 +36,19 @@
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Cellphone</span>
-                                <input id="CellPhone" name="CellPhone" type="text" class="form-control" placeholder="(00) 0 0000-0000">
+                                <input asp-for="CellPhone" id="CellPhone" name="CellPhone" type="text" class="form-control" placeholder="(00) 0 0000-0000" required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Email</span>
-                                <input id="Email" name="Email" type="text" class="form-control" placeholder="email@email.com">
+                                <input asp-for="Email" id="Email" name="Email" type="text" class="form-control" placeholder="employee_email@email.com" required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Birth Date</span>
-                                <input id="BirthDate" name="BirthDate" type="date" class="form-control" placeholder="Nascimento">
+                                <input asp-for="BirthDate" id="BirthDate" name="BirthDate" type="date" class="form-control" placeholder="Nascimento" required>
                             </div>
                         </div>
                     </div>
@@ -52,7 +58,7 @@
                         <div class="card-body upload-img-employee">
                             <img src="/Images/default-person-image.jpg" class="figure-img img-fluid rounded img-profile-select" alt="...">
                             <button id="btn-upload-img" class="btn btn-outline-primary img-profile-select">Upload</button>
-                            <input id="btn-img-file" type="file" hidden>
+                            <input @*asp-for="DocumentNumber"*@ id="btn-img-file" type="file" hidden>
                         </div>
                     </div>
                 </div>
@@ -70,26 +76,30 @@
                         <div class="col-2">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Zip Code</span>
-                                <input id="ZipCode" name="ZipCode" type="text" class="form-control" placeholder="00000-000">
-                                <span id="spn-zip-code-error" class="text-red not-visible">Informe um cep válido</span>
+                                <input asp-for="ZipCode" id="ZipCode" name="ZipCode" type="text" class="form-control" placeholder="00000-000" required>
+                                <div id="zip-code-error-containner" class="row not-visible">
+                                    <div class="col-sm">
+                                        <small id="zip-code-error" class="color-red">Please enter a valid zipcode.</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">State</span>
-                                <input id="State" name="State" type="text" class="form-control" disabled>
+                                <input asp-for="State" id="State" name="State" type="text" class="form-control" disabled required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">City</span>
-                                <input id="City" name="City" type="text" class="form-control" disabled>
+                                <input asp-for="City" id="City" name="City" type="text" class="form-control" disabled required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">Street</span>
-                                <input id="Street" name="Street" type="text" class="form-control" disabled>
+                                <input asp-for="Street" id="Street" name="Street" type="text" class="form-control" disabled required>
                             </div>
                         </div>
                     </div>
@@ -97,19 +107,19 @@
                         <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">Neighborhood</span>
-                                <input id="Neighborhood" name="Neighborhood" type="text" class="form-control" disabled>
+                                <input asp-for="Neighborhood" id="Neighborhood" name="Neighborhood" type="text" class="form-control" disabled required>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">Number</span>
-                                <input id="StreetNumber" name="StreetNumber" type="text" class="form-control">
+                                <input asp-for="StreetNumber" id="StreetNumber" name="StreetNumber" type="text" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="">Reference</span>
-                                <input id="AdressReferencePoint" name="AdressReferencePoint" type="text" class="form-control">
+                                <input asp-for="AdressReferencePoint" id="AdressReferencePoint" name="AdressReferencePoint" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -118,15 +128,15 @@
         </fieldset>
     </div>
 </div>
-<div class="containner div-multiple-cards"> 
-    <div class="card mt-1 text-center card-fit">
+<div class="containner div-multiple-cards">
+    <div class="card mt-1 text-center card-fit ">
         <div class="card-body">
             <fieldset class="border p-4">
                 <legend class="float-none w-auto p-2">3 - Contract info</legend>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="input-group mb-3">
-                            <select class="form-select mb-3" aria-label=".form-select example">
+                            <select asp-for="DepartmentId" class="form-select mb-3" aria-label=".form-select example" required>
                                 <option value="none" selected>Select a Department</option>
                                 @foreach (var item in Enum.GetValues<MikeCars.Application.ViewModels.Enums.EnumDepartmentViewModel>())
                                 {
@@ -138,7 +148,7 @@
                     <div class="col-sm-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Salary amount</span>
-                            <input id="SalaryAmount" name="SalaryAmount" type="number" class="form-control" onchange="setTwoNumberDecimal" min="0" step="0.50">
+                            <input asp-for="SalaryAmount" id="SalaryAmount" name="SalaryAmount" type="number" class="form-control" onchange="setTwoNumberDecimal" min="0" step="0.50" required>
                         </div>
                     </div>
                 </div>
@@ -146,13 +156,13 @@
                     <div class="col-sm-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="">Start Date</span>
-                            <input id="ContractStartDate" name="ContractStartDate" type="date" class="form-control">
+                            <input asp-for="ContractStartDate" id="ContractStartDate" name="ContractStartDate" type="date" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="">End Date</span>
-                            <input id="ContractEndDate" name="ContractStartDate" type="date" class="form-control">
+                            <input asp-for="ContractEndDate" id="ContractEndDate" name="ContractStartDate" type="date" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -199,54 +209,96 @@
             </fieldset>
         </div>
     </div>
-
-
 </div>
 
 <script type="text/javascript" src="~/js/forms/Employee.js"></script>
 <script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function () {
-        triggerBtnUpload();
-        triggerZipCodeBlur();
+        buildDynamicTriggers();
     });
 
+    function buildDynamicTriggers() {
+        triggerBtnUpload();
+        triggerZipCodeBlur();
+    }
+
+    function buildTriggers() {
+        triggerZipCodeBlur();
+        triggerInputDocumentNumber();
+    }
+
     function triggerZipCodeBlur() {
-        document
-            .getElementById("ZipCode")
+        document.getElementById("ZipCode")
             .addEventListener("blur", function () {
-                let currentElement = document
-                    .getElementById("ZipCode");
-                var adreessInfo = getAdressByZipCode(currentElement.value);
-                return setHtmlAdressInfo(adreessInfo);
+                getAdressByZipCode(this);
             });
-
     }
 
-    function setHtmlAdressInfo(adressInfo) {
-        let jsObject = JSON.stringify(adressInfo);
-        console.log(jsObject + "ssssssssssssss");
-        console.log(adressInfo + "okkkk");
-        //document.getElementById("Street").innerHTML = adressInfo.logradouro;
+    function triggerInputDocumentNumber() {
+        document.getElementById("DocumentNumber")
+            .addEventListener("blur", function () {
+                enterDocumentDigits();
+            });
+    }
+
+    async function getAdressByZipCode(userZipCodeInput) {
+        let zipCode = userZipCodeInput.value;
+
+        if (zipCode.length == 8) {
+
+            let adress = await getAdressByZipCodeInViaCep(zipCode);
+            setHtmlAdressInfo(adress);
+
+        }
+        else {
+            showErrorWhenGettingAdressByZipCode();
+        }
+    }
+
+    function showErrorWhenGettingAdressByZipCode(){
+        document.getElementById("zip-code-error-containner").classList.remove("not-visible");
+    }
+
+    async function getAdressByZipCodeInViaCep(zipCode) {
+        let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
+        var jsonResponse = await response.json();
+        return jsonResponse;
+
+        //try {
+        //    let res = await fetch(url);
+        //    return await res.json();
+        //} catch (error) {
+        //    console.log(error);
+        //}
     }
 
 
 
-                //function enterDigits() {
-                //    var documentNumber = document.getElementById("DocumentNumber").value;
+    function setHtmlAdressInfo(adreessObject) {
+        document.getElementById("State").value = adreessObject.uf;
+        document.getElementById("City").value = adreessObject.localidade;
+        document.getElementById("Street").value = adreessObject.logradouro;
+        document.getElementById("Neighborhood").value = adreessObject.bairro;
+    }
 
-                //    console.log(documentNumber);
-                //    if (documentNumber.length == 11) { //CPF
-                //        documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
-                //        documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
-                //        documentNumber = documentNumber.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+    function enterDocumentDigits() {
+        var documentNumber = document.getElementById("DocumentNumber").value;
 
-                //        document.getElementById("DocumentNumber").innerText = documentNumber;
-                //        //showInvisibleElements();
+        if (documentNumber.length == 11) { //CPF
+            documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
+            documentNumber = documentNumber.replace(/(\d{3})(\d)/, "$1.$2")
+            documentNumber = documentNumber.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
 
-                //    } else {
-                //        //let warning = document.getElementById("warning-document-number");
-                //        //warning.classList.remove("not-visible");
-                //    }
-                //}
+            document.getElementById("DocumentNumber").innerText = documentNumber;
+            showInvisibleElements();
+
+        } else {
+            let warning = document.getElementById("document-number-error-containner");
+            warning.classList.remove("not-visible");
+        }
+    }
 </script>
+
+
+

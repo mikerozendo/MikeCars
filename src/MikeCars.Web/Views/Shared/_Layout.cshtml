@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MikeCars.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/flatly.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true" />
 
 </head>
 <body>
@@ -25,10 +26,15 @@
                         <li class="nav-item">
                             <a class="nav-link font-weight-bold" asp-area="" asp-controller="Person" asp-action="Create">Person</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold" asp-area="" asp-controller="Employee" asp-action="Create">Employee</a>
-                        </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle font-weight-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Employees</a>
+                            <div class="dropdown-menu">
+                                <a asp-area="" asp-controller="Employee" asp-action="Create" class=" dropdown-item">New</a>
+                                <a asp-area="" asp-controller="Employee" asp-action="Index" class="dropdown-item">Index</a>
+                            </div>
+                            <a class="nav-link font-weight-bold" asp-area="" asp-controller="Employee" asp-action="Create"></a>
+                        </li>
+@*                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle font-weight-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -37,7 +43,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-sm-2" type="search" placeholder="Search">

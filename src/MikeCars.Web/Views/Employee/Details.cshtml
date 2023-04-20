@@ -1,0 +1,17 @@
+﻿@model MikeCars.Application.ViewModels.EmployeeViewModel;
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<form asp-controller="Employee" asp-action="Create" method="post">
+    <partial name="_EmployeeForm.cshtml" for="@Model">
+        <div class="row mt-2">
+            <div class="col-6 btn-grid">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+            </div>
+            <div class="col-6 btn-grid">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+</form>
+

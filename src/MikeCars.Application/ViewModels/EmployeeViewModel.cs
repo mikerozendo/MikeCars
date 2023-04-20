@@ -17,4 +17,8 @@ public class EmployeeViewModel
     public string Neighborhood { get; set; }
     public string AdressReferencePoint { get; set; }
     public int TypeEmployeeId { get; set; }
+    public int DepartmentId { get; set; }
+    public decimal SalaryAmount { get; set; }
+    public DateTime ContractStartDate { get; set; }
+    public DateTime? ContractEndDate { get; set; }
 }

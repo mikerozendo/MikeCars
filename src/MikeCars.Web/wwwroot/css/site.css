@@ -18,7 +18,7 @@ body {
 }
 
 .not-visible {
-    display: none;
+    display: none !important;
 }
 
 .still-not-visible {
@@ -50,6 +50,10 @@ body {
     text-align:center;
 }
 
+.text-end {
+    text-align: end;
+}
+
 .card-fit {
     width: 45% !important;
     display: inline-block !important;
@@ -58,4 +62,13 @@ body {
 .div-multiple-cards {
     display: flex !important;
     justify-content: space-between !important;
+}
+
+.table-height {
+    height: 500px;
+    overflow-x: hidden;
+}
+
+.color-red {
+    color: red;
 }
