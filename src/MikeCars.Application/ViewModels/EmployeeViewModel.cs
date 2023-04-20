@@ -21,4 +21,6 @@ public class EmployeeViewModel
     public decimal SalaryAmount { get; set; }
     public DateTime ContractStartDate { get; set; }
     public DateTime? ContractEndDate { get; set; }
+
+    List<VacationViewModel> vacationList = new List<VacationViewModel>();
 }
