@@ -1,5 +1,9 @@
+* {
+    font-family: 'Courier New';
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -21,14 +25,6 @@ body {
     display: none !important;
 }
 
-.still-not-visible {
-    display: none;
-}
-
-.text-in-end {
-    text-align:right !important;
-}
-
 .img-profile-select {
     height: 100px !important;
     width: 130px !important;
@@ -40,18 +36,6 @@ body {
     display: flex;
     justify-content: center;
     height: fit-content;
-}
-
-.btn-grid {
-    display: grid;
-}
-
-.text-center {
-    text-align:center;
-}
-
-.text-end {
-    text-align: end;
 }
 
 .card-fit {
@@ -71,8 +55,4 @@ body {
 
 .color-red {
     color: red;
-}
-
-.content-end {
-    justify-content: end;
 }

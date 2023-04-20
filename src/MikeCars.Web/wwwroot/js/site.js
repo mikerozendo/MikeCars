@@ -30,6 +30,24 @@ function buildToast(classToBeAdded, message) {
     showToast();
 }
 
+function buildModalCancelNotification(urlToRedirect, message) {
+    buildModalText(message);
+    buildModalUrlToRedirect(urlToRedirect);
+}
+
+function buildModalUrlToRedirect(url) {
+    document.getElementById("modal-redirect-url").setAttribute("href", url);
+}
+
+function buildModalText(message) {
+    clearModalText();
+    document.getElementById("modal-body-cancel-notification").innerHTML = `<strong id="modal-message">${message}</strong>`;
+}
+
+function clearModalText() {
+    document.getElementById("modal-body-cancel-notification").innerHTML = "";
+}
+
 function filterOnTable(filterElement) {
 
     let textContentToSearch = filterElement.value.toLowerCase().trim();
