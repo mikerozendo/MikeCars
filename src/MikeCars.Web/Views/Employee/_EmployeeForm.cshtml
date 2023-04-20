@@ -248,29 +248,33 @@
         if (zipCode.length == 8) {
 
             let adress = await getAdressByZipCodeInViaCep(zipCode);
-            setHtmlAdressInfo(adress);
-
+            if (adress == null) {
+                showErrorWhenGettingAdressByZipCode();
+            } else {
+                setHtmlAdressInfo(adress);
+            }
         }
         else {
             showErrorWhenGettingAdressByZipCode();
         }
     }
 
-    function showErrorWhenGettingAdressByZipCode(){
+    function showErrorWhenGettingAdressByZipCode() {
         document.getElementById("zip-code-error-containner").classList.remove("not-visible");
     }
 
     async function getAdressByZipCodeInViaCep(zipCode) {
-        let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
-        var jsonResponse = await response.json();
-        return jsonResponse;
+        //let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
+        //var jsonResponse = await response.json();
+        //return jsonResponse;
 
-        //try {
-        //    let res = await fetch(url);
-        //    return await res.json();
-        //} catch (error) {
-        //    console.log(error);
-        //}
+        try {
+            let response = await fetch("https://viacep.com.br/ws/" + zipCode + "/json/");
+            var jsonResponse = await response.json();
+            return jsonResponse;
+        } catch (error) {
+            return null
+        }
     }
 
 
