@@ -16,7 +16,6 @@ function clearToastMessage() {
     document.getElementById("toast-body").innerHTML = "";
 }
 
-
 function clearToastStyleClasses() {
     document.getElementById("toast-notification").classList.remove('bg-warning');
 }
@@ -32,6 +31,44 @@ function buildToast(classToBeAdded, message) {
     showToast();
 }
 
+function filterOnTable(filterElement) {
+
+    let textContentToSearch = filterElement.value.toLowerCase().trim();
+    var tableRows = document.getElementById("table-body").rows;
+
+    for (let row of tableRows) {
+
+        if (textContentToSearch.length > 0) {
+
+            let filteredRowNodes = Array.from(row.cells)
+                .filter(dataTable => dataTable.classList.contains("searchable"))
+
+            let arrayData = [];
+
+            for (let tableData of filteredRowNodes) {
+                let rowText = tableData.outerText.toLowerCase();
+
+                if (rowText.includes(textContentToSearch)) {
+                    arrayData.push(true);
+                } else {
+                    arrayData.push(false);
+                }
+
+            }
+
+            let shouldFilter = arrayData.find(x => x);
+
+            if (shouldFilter != undefined && shouldFilter) {
+                row.classList.remove("not-visible")
+            } else {
+                row.classList.add("not-visible")
+            }
+
+        } else {
+            row.classList.remove("not-visible")
+        }    
+    }
+}
 
 
 function showInvisibleElements() {

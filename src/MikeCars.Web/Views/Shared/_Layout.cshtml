@@ -35,17 +35,17 @@
                             <a class="nav-link font-weight-bold" asp-area="" asp-controller="Employee" asp-action="Create"></a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                    <div class="d-flex">
+                        <input class="form-control me-sm-2" type="search" placeholder="Type to filter on tables">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="filterOnTable()">Search</button>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <partial name="_Notification.cshtml">
     <div class="container-fluid bg-light p-5">
-        <main role="main">
+        <main class="main-concent" role="main">
             @RenderBody()
         </main>
     </div>
