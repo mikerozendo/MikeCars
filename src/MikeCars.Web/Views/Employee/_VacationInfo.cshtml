@@ -1,0 +1,75 @@
+﻿@model List<MikeCars.Application.ViewModels.VacationViewModel>
+<fieldset class="border p-4">
+    <legend class="float-none w-auto p-2">3 - Vacation Info</legend>
+    <div class="row">
+        <div class="col-sm">
+            <table class="table table-striped table-hover main-table">
+                <thead>
+                    <tr>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Bought</th>
+                        <th>Performed</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+@*                    @foreach (var item in Model.ToList())
+                    {
+                        <tr>
+                            <td>@item.Start.ToString("yyyy-MM-dd")</td>
+                            <td>@item.End.ToString("yyyy-MM-dd")</td>
+                            <td>(@item.Bought ?@item.BoughtDaysAmount : "-")</td>
+                            <td>(@item.IsPast ?@item.DaysSentToEmployee : "-")</td>
+                            <td><span class="badge bg-success">&nbsp;</span></td>
+                            <td><span class="badge @(item.IsPast ? "bg-success" : "bg-prymary")">&nbsp;</span></td>
+                        </tr>
+                    }*@
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-success">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-primary">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-primary">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-primary">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-primary">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
+                        <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td><span class="badge bg-primary">&nbsp;</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
