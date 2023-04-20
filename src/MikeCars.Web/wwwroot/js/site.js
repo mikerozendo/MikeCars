@@ -7,6 +7,32 @@
     toastList.forEach(toast => toast.show()); // This show them
 }
 
+function buildToastMessase(message) {
+    clearToastMessage();
+    document.getElementById("toast-body").innerHTML = `<strong class="text-white" id="toast-message">${message}</strong>`;
+}
+
+function clearToastMessage() {
+    document.getElementById("toast-body").innerHTML = "";
+}
+
+
+function clearToastStyleClasses() {
+    document.getElementById("toast-notification").classList.remove('bg-warning');
+}
+
+function buildToastStyle(classToBeAdded) {
+    clearToastStyleClasses();
+    document.getElementById("toast-notification").classList.add(classToBeAdded);
+}
+
+function buildToast(classToBeAdded, message) {
+    buildToastMessase(message);
+    buildToastStyle(classToBeAdded);
+    showToast();
+}
+
+
 
 function showInvisibleElements() {
     document.querySelectorAll("not-visible").forEach(

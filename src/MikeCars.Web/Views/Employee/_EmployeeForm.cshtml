@@ -3,12 +3,12 @@
 
 <div aria-live="polite" aria-atomic="true" class="position-relative">
     <div class="toast-container position-absolute top-0 end-0 p-3">
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toast-notification" class="toast bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header content-end">
                 <small class="text-muted">just now</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div id="toast-body" class="toast-body bg-dark">
+            <div id="toast-body" class="toast-body">
             </div>
         </div>
     </div>
@@ -272,12 +272,6 @@
         }
     }
 
-    function showErrorWhenGettingAdressByZipCode() {
-        document.getElementById("toast-body").innerHTML = '';
-        document.getElementById("toast-body").innerHTML += '<span class="text-white bg-dark" id="toast-message">Please, enter a valid zip code.</span>';
-        showToast();
-    }
-
     function clearHtmlAdressInfo() {
         document.getElementById("State").value = "";
         document.getElementById("City").value = "";
@@ -308,10 +302,13 @@
     }
 
     function showErrorWhenInvalidDocumentNumber(){
-        document.getElementById("toast-body").innerHTML = '';
-        document.getElementById("toast-body").innerHTML += '<span class="text-white bg-dark" id="toast-message">Please, enter a valid document number.</span>';
-        showToast();
+        buildToast("bg-warning", "Please, enter a valid document number.")
     }
+
+    function showErrorWhenGettingAdressByZipCode() {
+        buildToast("bg-warning", "Please, enter a valid zip code")
+    }
+
 </script>
 
 
