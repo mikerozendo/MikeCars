@@ -1,33 +1,13 @@
-﻿function showToast() {
-    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-    var toastList = toastElList.map(function (toastEl) {
-        return new bootstrap.Toast(toastEl)
-    });
-    toastList.forEach(toast => toast.show());
+﻿function buildSuccessToast(message) {
+    notifier.show('Success!', message, 'success', '/Images/default-notifier-success.png', 0);
 }
 
-function buildToastMessase(message) {
-    clearToastMessage();
-    document.getElementById("toast-body").innerHTML = `<strong class="text-white" id="toast-message">${message}</strong>`;
+function buildWarningToast(message) {
+    notifier.show("Warning!", message, 'warning', '/Images/default-notifier-warning.png', 0);
 }
 
-function clearToastMessage() {
-    document.getElementById("toast-body").innerHTML = "";
-}
-
-function clearToastStyleClasses() {
-    document.getElementById("toast-notification").classList.remove('bg-warning');
-}
-
-function buildToastStyle(classToBeAdded) {
-    clearToastStyleClasses();
-    document.getElementById("toast-notification").classList.add(classToBeAdded);
-}
-
-function buildToast(classToBeAdded, message) {
-    buildToastMessase(message);
-    buildToastStyle(classToBeAdded);
-    showToast();
+function buildErrorToast(message) {
+    notifier.show('Error!', message, 'danger', '/Images/default-notifier-error.png', 0);
 }
 
 function buildModalCancelNotification(urlToRedirect, message) {
@@ -86,19 +66,6 @@ function filterOnTable(filterElement) {
         }    
     }
 }
-
-//function showInvisibleElements() {
-//    document.querySelectorAll("not-visible").forEach(
-//        function (element, i) {
-//            debugger;
-//            element[i].classList.remove("not-visible");
-//            console.log('[forEach]', nome, i);
-//        });
-
-//    for (i = 0; i < elements.length; i++) {
-//        elements[i].classList.remove("not-visible");
-//    }
-//}
 
 //function setTwoNumberDecimal(event) {
 //    this.value = parseFloat(this.value).toFixed(2);

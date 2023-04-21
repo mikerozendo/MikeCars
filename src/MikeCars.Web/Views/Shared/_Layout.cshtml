@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/MikeCars.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/flatly.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/bcc1568e4c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/notifier.css" />
 </head>
 <body>
     <header>
@@ -39,8 +40,8 @@
             </div>
         </nav>
     </header>
-    <partial name="_ToastNotification.cshtml">
-    <div class="container-fluid bg-light p-5">
+@*    <partial name="_ToastNotification.cshtml">
+*@    <div class="container-fluid bg-light p-5">
         <main class="main-concent" role="main">
             <partial name="_CancelSaveNotification.cshtml">
             @RenderBody()
@@ -48,12 +49,13 @@
     </div>
     <footer class="border-top footer text-muted bg-light">
         <div class="container">
-            &copy; 2023 - MikeCars.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Developed by Michael Rozendo - (11) 9 4912-6483 - <a href="https://br.linkedin.com/in/mikerozendo">LinkedIn</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/notifier.js" asp-append-version="true"></script>
+    <script src="~/js/utils.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
