@@ -1,7 +1,7 @@
 ﻿@using MikeCars.Application.ViewModels.Enums;
 @model MikeCars.Application.ViewModels.EmployeeViewModel;
 
-<div class="card text-center">
+<div class="card text-center bg-light">
     <div class="card-body">
         <fieldset class="border p-4">
             <legend class="float-none w-auto p-2">1 - Personal Information</legend>
@@ -66,7 +66,7 @@
         </fieldset>
     </div>
 </div>
-<div class="card mt-1 text-center">
+<div class="card mt-1 text-center bg-light">
     <div class="card-body">
         <fieldset class="border p-4">
             <legend class="float-none w-auto p-2">2 - Adress Information</legend>
@@ -123,7 +123,7 @@
         </fieldset>
     </div>
 </div>
-<div class="card mt-1 text-center">
+<div class="card mt-1 text-center bg-light">
     <div class="card-body">
         <fieldset class="border p-4">
             <legend class="float-none w-auto p-2">3 - Contract info</legend>
@@ -163,114 +163,6 @@
         </fieldset>
     </div>
 </div>
-@*<div class="containner div-multiple-cards">
-    <div class="card mt-1 text-center card-fit ">
-        <div class="card-body">
-            <fieldset class="border p-4">
-                <legend class="float-none w-auto p-2">3 - Contract info</legend>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="input-group mb-3">
-                            <select asp-for="DepartmentId" class="form-select mb-3" aria-label=".form-select example" required>
-                                <option value="none" selected>Select a Department</option>
-                                @foreach (var item in Enum.GetValues<MikeCars.Application.ViewModels.Enums.EnumDepartmentViewModel>())
-                                {
-                                    <option value="@((int)item)">@(String.Concat((int)item, " - ", item.ToString()))</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">Salary amount</span>
-                            <input asp-for="SalaryAmount" id="SalaryAmount" name="SalaryAmount" type="number" class="form-control" onchange="setTwoNumberDecimal" min="0" step="0.50" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="">Start Date</span>
-                            <input asp-for="ContractStartDate" id="ContractStartDate" name="ContractStartDate" type="date" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="">End Date</span>
-                            <input asp-for="ContractEndDate" id="ContractEndDate" name="ContractStartDate" type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    <div class="card mt-1 text-center card-fit">
-        <div class="card-body">
-            <fieldset class="border p-4">
-                <legend class="float-none w-auto p-2">3 - Vacation Info</legend>
-                <div class="row">
-                    <div class="col-sm">
-                        <table class="table table-striped table-hover main-table">
-                            <thead>
-                                <tr>
-                                    <th>Start</th>
-                                    <th>End</th>
-                                    <th>Bought</th>
-                                    <th>Performed</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-success">&nbsp;</span></td>
-                                </tr>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-primary">&nbsp;</span></td>
-                                </tr>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-primary">&nbsp;</span></td>
-                                </tr>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-primary">&nbsp;</span></td>
-                                </tr>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-primary">&nbsp;</span></td>
-                                </tr>
-                                <tr>
-                                    <td>@DateTime.Now.AddMonths(-12).ToString("yyyy-MM-dd")</td>
-                                    <td>@DateTime.Now.AddMonths(-11).ToString("yyyy-MM-dd")</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td><span class="badge bg-primary">&nbsp;</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-</div>*@
 
 <script type="text/javascript">
 
