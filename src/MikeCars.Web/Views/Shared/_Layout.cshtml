@@ -8,43 +8,46 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MikeCars.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/flatly.css" asp-append-version="true" />
-    <script src="https://kit.fontawesome.com/bcc1568e4c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/notifier.css" />
+    <script src="https://kit.fontawesome.com/bcc1568e4c.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-@*                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle font-weight-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Employees</a>
-                            <div class="dropdown-menu">
-                                <a asp-area="" asp-controller="Employee" asp-action="Create" class=" dropdown-item">New</a>
-                                <a asp-area="" asp-controller="Employee" asp-action="Index" class="dropdown-item">Index</a>
-                            </div>
-                            <a class="nav-link font-weight-bold" asp-area="" asp-controller="Employee" asp-action="Create"></a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Type to filter on tables">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="filterOnTable()">Search</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header justify-content-end">
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav me-auto justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle font-weight-bold" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Employees</a>
+                                <div class="dropdown-menu">
+                                    <a asp-area="" asp-controller="Employee" asp-action="Create" class=" dropdown-item">New</a>
+                                    <a asp-area="" asp-controller="Employee" asp-action="Index" class="dropdown-item">Index</a>
+                                </div>
+                                <a class="nav-link font-weight-bold" asp-area="" asp-controller="Employee" asp-action="Create"></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-@*    <partial name="_ToastNotification.cshtml">
-*@    <div class="container-fluid bg-light p-5">
+    <div class="container-fluid bg-light p-5">
         <main class="main-concent" role="main">
             <partial name="_CancelSaveNotification.cshtml">
-            @RenderBody()
+                @RenderBody()
         </main>
     </div>
     <footer class="border-top footer text-muted bg-light">
@@ -56,6 +59,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/notifier.js" asp-append-version="true"></script>
     <script src="~/js/utils.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
