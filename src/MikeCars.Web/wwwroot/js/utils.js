@@ -1,4 +1,10 @@
-﻿function buildSuccessToast(message) {
+﻿const offCanvas = document.getElementById('offcanvasDarkNavbar');
+offCanvas.addEventListener('show.bs.offcanvas', event => {
+    offCanvas.style.setProperty("width", "16%", "important");
+    offCanvas.style.setProperty("border", "none", "important");
+});
+
+function buildSuccessToast(message) {
     notifier.show('Success!', message, 'success', '/Images/default-notifier-success.png', 0);
 }
 
