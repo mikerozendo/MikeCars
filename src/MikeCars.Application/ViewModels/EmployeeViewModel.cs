@@ -1,4 +1,6 @@
-﻿namespace MikeCars.Application.ViewModels;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace MikeCars.Application.ViewModels;
 
 public class EmployeeViewModel
 {
@@ -21,6 +23,10 @@ public class EmployeeViewModel
     public decimal SalaryAmount { get; set; }
     public DateTime ContractStartDate { get; set; }
     public DateTime? ContractEndDate { get; set; }
+    public TimeSpan? WorkStartHour { get; set; }
+    public TimeSpan? WorkEndHour { get; set; }
+    public IFormFile Image { get; set; }
+    public string ImagePath { get; set; }
 
-    List<VacationViewModel> vacationList = new List<VacationViewModel>();
+    public List<VacationViewModel> vacationList = new();
 }

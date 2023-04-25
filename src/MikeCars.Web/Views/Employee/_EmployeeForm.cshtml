@@ -56,9 +56,9 @@
                 <div class="col-3 p-0 m-0">
                     <div class="card">
                         <div class="card-body upload-img-employee">
-                            <img src="/Images/default-person-image.jpg" class="figure-img img-fluid rounded img-profile-select" alt="...">
+                            <img src="@(Model is null || string.IsNullOrEmpty(Model.ImagePath) ? "/Images/default-person-image.jpg" :Model.ImagePath)" class="figure-img img-fluid rounded img-profile-select" alt="...">
                             <button id="btn-upload-img" class="btn btn-outline-primary img-profile-select">Upload</button>
-                            <input @*asp-for="DocumentNumber"*@ id="btn-img-file" type="file" hidden>
+                            <input asp-for="Image" id="btn-img-file" type="file" hidden>
                         </div>
                     </div>
                 </div>
@@ -147,16 +147,28 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="">Start Date</span>
                         <input asp-for="ContractStartDate" id="ContractStartDate" name="ContractStartDate" type="date" class="form-control" required>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="">End Date</span>
                         <input asp-for="ContractEndDate" id="ContractEndDate" name="ContractStartDate" type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="">Start Hour</span>
+                        <input asp-for="WorkStartHour" id="WorkStartHour" name="WorkStartHour" type="time" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="">End Hour</span>
+                        <input asp-for="WorkEndHour" id="WorkEndHour" name="WorkEndHour" type="time" class="form-control">
                     </div>
                 </div>
             </div>
