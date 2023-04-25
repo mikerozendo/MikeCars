@@ -17,6 +17,7 @@ public class EmployeeController : Controller
 
     public IActionResult Details(int id)
     {
+
         #region Mock
         EmployeeViewModel employee = new EmployeeViewModel()
         {
@@ -47,6 +48,7 @@ public class EmployeeController : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] EmployeeViewModel employee)
     {
+        employee.LastName.ToString();
         await Task.Delay(12);
         return View();
     }

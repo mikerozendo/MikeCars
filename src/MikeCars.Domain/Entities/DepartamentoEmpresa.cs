@@ -13,4 +13,9 @@ public class DepartamentoEmpresa : Base
         EnumDepartamentoEmpresa = enumDepartamentoEmpresa;
         Nome = EnumDepartamentoEmpresa.ToString();
     }
+
+    public List<Funcionario> GetActiveEmploes()
+    {
+        return Funcionarios.ToList().Where(x => x.Ativo).ToList();
+    }
 }
