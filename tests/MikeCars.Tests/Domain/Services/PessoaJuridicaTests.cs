@@ -5,14 +5,14 @@ namespace MikeCars.Tests.Domain.Services;
 public class PessoaJuridicaTests
 {
     private readonly Mock<IPessoaJuridicaRepository> _pessoaJuridicaRepository;
-    private readonly Mock<IPessoaFisicaService> _pessoaFisicaService;
+    private readonly Mock<INaturalPersonService> _pessoaFisicaService;
     private readonly Mock<IDocumentoRepository> _documentoRepository;
     private string CpfValidoUserSecret { get; }
 
     public PessoaJuridicaTests()
     {
         _pessoaJuridicaRepository = new Mock<IPessoaJuridicaRepository>();
-        _pessoaFisicaService = new Mock<IPessoaFisicaService>();
+        _pessoaFisicaService = new Mock<INaturalPersonService>();
         _documentoRepository = new Mock<IDocumentoRepository>();
         CpfValidoUserSecret = UserSecretsBuilder<PessoaJuridicaTests>.Build();
     }

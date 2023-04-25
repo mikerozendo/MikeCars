@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MikeCars.Application.Interfaces;
 using MikeCars.Application.ViewModels;
 
 namespace MikeCars.Web.Controllers;
 
 public class EmployeeController : Controller
 {
+    private readonly IEmployeeAppService _employeeAppService;
+    public EmployeeController(IEmployeeAppService employeeAppService)
+    {
+        _employeeAppService = employeeAppService;
+    }
+
     public IActionResult Index()
     {
         return View();
@@ -48,8 +55,6 @@ public class EmployeeController : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] EmployeeViewModel employee)
     {
-        employee.LastName.ToString();
-        await Task.Delay(12);
-        return View();
+        return await _employeeAppService.Create(employee);
     }
 }
