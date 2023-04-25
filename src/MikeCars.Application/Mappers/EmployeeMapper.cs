@@ -22,7 +22,15 @@ public static class EmployeeMapper
             {
                 Email = employeeViewModel.Email,
                 TelefoneCelular = employeeViewModel.CellPhone
-            }
+            },
+            Endereco = new Endereco(EnumTipoEndereco.Residencial, EnumUf.SP)
+            {
+                Bairro = employeeViewModel.Neighborhood,
+                Cidade = employeeViewModel.City,
+                Logradouro = employeeViewModel.Street,
+                Numero = employeeViewModel.StreetNumber,
+                PontoReferencia = employeeViewModel.AdressReferencePoint
+            },
         };
 
         return funcionario;

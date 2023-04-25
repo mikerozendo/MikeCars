@@ -30,8 +30,10 @@ public static class PessoaFisicaMapper
                     Numero = pessoaFisica.Endereco.Numero,
                     Uf = pessoaFisica.Endereco.EnumUf.ToString(),
                     PontoReferencia = pessoaFisica.Endereco.PontoReferencia
-                },          
-            }
+                },
+            },
+            Nascimento = pessoaFisica.Nascimento,
+            Nome = pessoaFisica.Nome
         };
 
         return pessoa;
