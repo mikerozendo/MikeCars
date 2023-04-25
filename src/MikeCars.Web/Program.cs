@@ -1,7 +1,19 @@
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MikeCars.Infraestructure.Repository.Context;
+using System.Data.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration;
+DbConnection dbConnection = new SqlConnection(configuration.GetConnectionString("App"));
+
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlServer(dbConnection, 
+    b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
 
 var app = builder.Build();
 

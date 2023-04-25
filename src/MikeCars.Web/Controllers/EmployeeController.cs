@@ -6,11 +6,11 @@ namespace MikeCars.Web.Controllers;
 
 public class EmployeeController : Controller
 {
-    private readonly IEmployeeAppService _employeeAppService;
-    public EmployeeController(IEmployeeAppService employeeAppService)
-    {
-        _employeeAppService = employeeAppService;
-    }
+    //private readonly IEmployeeAppService _employeeAppService;
+    //public EmployeeController(IEmployeeAppService employeeAppService)
+    //{
+    //    _employeeAppService = employeeAppService;
+    //}
 
     public IActionResult Index()
     {
@@ -55,6 +55,7 @@ public class EmployeeController : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] EmployeeViewModel employee)
     {
-        return await _employeeAppService.Create(employee);
+        return Ok();
+        //return await _employeeAppService.Create(employee);
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace MikeCars.Infraestructure.Repository.Models;
 
-public class EnderecoModel : BaseModel
+public class EnderecoModel 
 {
+    public int EnderecoModelId { get; set; }
+
     public string Logradouro { get; set; }
     public string Numero { get; set; }
     public string Bairro { get; set; }
