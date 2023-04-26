@@ -12,8 +12,8 @@ using MikeCars.Infraestructure.Repository.Context;
 namespace MikeCars.Infraestructure.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230426012409_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230426223004_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
