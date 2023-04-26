@@ -31,4 +31,9 @@ public class FuncionarioService : IFuncionarioService
             return Result.Fail(error);  
         }
     }
+
+    public Task<Result> Get()
+    {
+        throw new NotImplementedException();
+    }
 }

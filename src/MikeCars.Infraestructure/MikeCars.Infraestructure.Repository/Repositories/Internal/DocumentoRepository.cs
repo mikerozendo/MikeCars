@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentResults;
+using Microsoft.EntityFrameworkCore;
 using MikeCars.Domain.Interfaces.Repositories;
 using MikeCars.Domain.ValueObjects;
 using MikeCars.Infraestructure.Repository.Context;
@@ -17,10 +18,16 @@ public class DocumentoRepository : IDocumentoRepository
 
     public async Task<bool> AlreadyExistsAsync(Documento entity)
     {
-        DocumentoModel model = entity.ToModel();   
+        DocumentoModel model = entity.ToModel();
 
         DocumentoModel? result = await _context.Documentos.FirstOrDefaultAsync(x => model.Numero.Equals(x.Numero));
 
         return result is not null;
     }
+
+    //public async Task<Result<int>> GetEmployeeIdByDocument(Documento entity)
+    //{
+    //    DocumentoModel? result = await _context.Documentos.FirstOrDefaultAsync(x => x.Numero == entity.Numero);
+    //    int employeeId = _context.Pessoas.Where(x => x.)
+    //}
 }

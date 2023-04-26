@@ -17,7 +17,40 @@
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function () {
             buildModalCancelNotification("@Url.Action("Index", "Employee")", `Are you sure about <strong class="color-red">CANCEL</strong>? All unsaved work are going to be lost.`);
+            triggerForm();
         });
-    </script> 
+
+        function triggerForm() {
+            document.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                fetch("@Url.Action("Create", "Employee")", {
+                    method: 'POST',
+                    body: new FormData(event.target),
+                }).then(function (response) {
+                    if (response.ok) {
+                        debugger;
+                        window.location.href = "@Url.Action("Index", "Employee")";
+                        return false;
+                    } else {
+                        let teste = response.text();
+                        debugger;
+                        showErrorFromServer(teste);
+                        return false;
+                    }
+                }).catch(function (error) {
+                    showErrorFromServer(error);
+                });
+
+                return false;
+            });
+
+        }
+
+        function showErrorFromServer(content) {
+            buildWarningToast(`<strong>${content}</strong>`);
+        }
+    </script>
 }
 

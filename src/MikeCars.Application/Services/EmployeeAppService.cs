@@ -28,4 +28,9 @@ public class EmployeeAppService : IEmployeeAppService
             return new BadRequestObjectResult("ERROR when creating a employee in the system!");
         }
     }
+
+    public Task<IActionResult> Get()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -11,19 +11,24 @@ public static class PessoaFisicaMapper
         {
             AgenteModel = new AgenteModel()
             {
+                IdTipoAgente = (int)pessoaFisica.EnumTipoAgente,
+
                 ContatoInfoModel = new ContatoInfoModel()
                 {
+                    ContatoInfoModelId = pessoaFisica.ContatoInfo.Id,
                     Email = pessoaFisica.ContatoInfo.Email,
                     TelefoneCelular = pessoaFisica.ContatoInfo.TelefoneCelular,
                     TelefoneResidencial = pessoaFisica.ContatoInfo.TelefoneResidencial,
                 },
                 DocumentoModel = new DocumentoModel()
                 {
+                    DocumentoModelId = pessoaFisica.Documento.Id,
                     IdTipoDocumento = (int)pessoaFisica.Documento.EnumTipoDocumento,
                     Numero = pessoaFisica.Documento.NumeroFormatado
                 },
                 EnderecoModel = new EnderecoModel()
                 {
+                    EnderecoModelId = pessoaFisica.Endereco.Id,
                     Bairro = pessoaFisica.Endereco.Bairro,
                     Cidade = pessoaFisica.Endereco.Cidade,
                     Logradouro = pessoaFisica.Endereco.Logradouro,
@@ -32,8 +37,10 @@ public static class PessoaFisicaMapper
                     PontoReferencia = pessoaFisica.Endereco.PontoReferencia
                 },
             },
+
             Nascimento = pessoaFisica.Nascimento,
-            Nome = pessoaFisica.Nome
+            Nome = pessoaFisica.Nome,
+            Sobrenome = pessoaFisica.Sobrenome,
         };
 
         return pessoa;

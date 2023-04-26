@@ -24,38 +24,39 @@ namespace MikeCars.Infraestructure.Repository.Migrations
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.AgenteModel", b =>
                 {
-                    b.Property<int>("AgenteModeId")
+                    b.Property<int>("AgenteModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("Id");
 
-                    b.Property<int>("IdContatoInfoModel")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AgenteModelId"));
+
+                    b.Property<int>("IdContatoinfoModel")
                         .HasColumnType("int")
-                        .HasColumnName("id-contato-info");
+                        .HasColumnName("IdContatoInfo");
 
                     b.Property<int>("IdDocumentoModel")
                         .HasColumnType("int")
-                        .HasColumnName("id-documento");
+                        .HasColumnName("IdDocumento");
 
                     b.Property<int>("IdEnderecoModel")
                         .HasColumnType("int")
-                        .HasColumnName("id-endereco");
+                        .HasColumnName("IdEndereco");
 
-                    b.Property<int>("IdPessoaFisicaModel")
+                    b.Property<int?>("IdPessoaFisicaModel")
                         .HasColumnType("int");
 
                     b.Property<int>("IdTipoAgente")
                         .HasColumnType("int")
-                        .HasColumnName("id-tipo-agente");
+                        .HasColumnName("IdTipoAgente");
 
-                    b.HasKey("AgenteModeId")
-                        .HasName("pk-agente");
+                    b.HasKey("AgenteModelId")
+                        .HasName("pkAgente");
 
-                    b.HasIndex("AgenteModeId")
-                        .IsUnique()
-                        .HasDatabaseName("idx-agente");
+                    b.HasIndex("AgenteModelId")
+                        .HasDatabaseName("idxAgente");
 
-                    b.ToTable("t-agente", (string)null);
+                    b.ToTable("Agente", (string)null);
                 });
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.ContatoInfoModel", b =>
@@ -63,14 +64,14 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Property<int>("ContatoInfoModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContatoInfoModelId"));
 
                     b.Property<string>("Email")
                         .HasMaxLength(25)
                         .HasColumnType("varchar")
-                        .HasColumnName("email");
+                        .HasColumnName("Email");
 
                     b.Property<int>("IdAgente")
                         .HasColumnType("int");
@@ -78,17 +79,20 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Property<string>("TelefoneCelular")
                         .HasMaxLength(20)
                         .HasColumnType("varchar")
-                        .HasColumnName("celular");
+                        .HasColumnName("Celular");
 
                     b.Property<string>("TelefoneResidencial")
                         .HasMaxLength(20)
                         .HasColumnType("varchar")
-                        .HasColumnName("telefone-residencia");
+                        .HasColumnName("TelefoneResidencial");
 
                     b.HasKey("ContatoInfoModelId")
-                        .HasName("pk-contato-info");
+                        .HasName("PkContatoInfo");
 
-                    b.ToTable("t-contato-info", (string)null);
+                    b.HasIndex("IdAgente")
+                        .IsUnique();
+
+                    b.ToTable("ContatoInfo", (string)null);
                 });
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.DocumentoModel", b =>
@@ -96,34 +100,37 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Property<int>("DocumentoModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentoModelId"));
 
                     b.Property<int>("IdAgente")
                         .HasColumnType("int")
-                        .HasColumnName("id-agente");
+                        .HasColumnName("IdAgente");
 
                     b.Property<int>("IdTipoDocumento")
                         .HasColumnType("int")
-                        .HasColumnName("id-tipo-documento");
+                        .HasColumnName("IdTipoDocumento");
 
                     b.Property<string>("Numero")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("varchar")
-                        .HasColumnName("documento");
+                        .HasColumnName("Numero");
 
                     b.HasKey("DocumentoModelId")
-                        .HasName("pk-documento");
+                        .HasName("PkDocumento");
 
                     b.HasIndex("DocumentoModelId")
-                        .HasDatabaseName("idx-id-documento");
+                        .HasDatabaseName("idxiddocumento");
+
+                    b.HasIndex("IdAgente")
+                        .IsUnique();
 
                     b.HasIndex("Numero")
-                        .HasDatabaseName("idx-numero-documento");
+                        .HasDatabaseName("idxnumerodocumento");
 
-                    b.ToTable("t-documento", (string)null);
+                    b.ToTable("Documento", (string)null);
                 });
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.EnderecoModel", b =>
@@ -131,50 +138,54 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Property<int>("EnderecoModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnderecoModelId"));
 
                     b.Property<string>("Bairro")
-                        .HasMaxLength(45)
+                        .HasMaxLength(150)
                         .HasColumnType("varchar")
-                        .HasColumnName("bairro");
+                        .HasColumnName("Bairro");
 
                     b.Property<string>("Cidade")
                         .HasMaxLength(150)
                         .HasColumnType("varchar")
-                        .HasColumnName("cidade");
+                        .HasColumnName("Cidade");
 
                     b.Property<int>("IdAgente")
                         .HasColumnType("int");
 
                     b.Property<int>("IdTipoEndereco")
                         .HasColumnType("int")
-                        .HasColumnName("id-tipo-endereco");
+                        .HasColumnName("IdTipoEndereco");
 
                     b.Property<string>("Logradouro")
+                        .HasMaxLength(150)
                         .HasColumnType("varchar")
-                        .HasColumnName("logradouro");
+                        .HasColumnName("Logradouro");
 
                     b.Property<string>("Numero")
-                        .HasMaxLength(10)
+                        .HasMaxLength(20)
                         .HasColumnType("varchar")
-                        .HasColumnName("numero");
+                        .HasColumnName("Numero");
 
                     b.Property<string>("PontoReferencia")
                         .HasMaxLength(225)
                         .HasColumnType("varchar")
-                        .HasColumnName("ponto-referencia");
+                        .HasColumnName("PontoReferencia");
 
                     b.Property<string>("Uf")
                         .HasMaxLength(2)
                         .HasColumnType("varchar")
-                        .HasColumnName("uf");
+                        .HasColumnName("Uf");
 
                     b.HasKey("EnderecoModelId")
-                        .HasName("pk-endereco");
+                        .HasName("pkendereco");
 
-                    b.ToTable("t-endereco", (string)null);
+                    b.HasIndex("IdAgente")
+                        .IsUnique();
+
+                    b.ToTable("Endereco", (string)null);
                 });
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.PessoaFisicaModel", b =>
@@ -182,7 +193,7 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Property<int>("PessoaFisicaModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PessoaFisicaModelId"));
 
@@ -191,49 +202,78 @@ namespace MikeCars.Infraestructure.Repository.Migrations
 
                     b.Property<DateTime>("Nascimento")
                         .HasColumnType("datetime")
-                        .HasColumnName("nascimento");
+                        .HasColumnName("Nascimento");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Nome");
+
+                    b.Property<string>("Sobrenome")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("varchar")
-                        .HasColumnName("nome");
+                        .HasColumnName("Sobrenome");
 
                     b.HasKey("PessoaFisicaModelId")
-                        .HasName("id-pessoa");
+                        .HasName("IdPessoa");
+
+                    b.HasIndex("IdAgenteModel")
+                        .IsUnique();
 
                     b.HasIndex("PessoaFisicaModelId")
-                        .HasDatabaseName("dx-pessoa-fisica");
+                        .HasDatabaseName("idxpessoafisica");
 
-                    b.ToTable("t-pessoa-fisica", (string)null);
+                    b.ToTable("PessoaFisica", (string)null);
+                });
+
+            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.ContatoInfoModel", b =>
+                {
+                    b.HasOne("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModel")
+                        .WithOne("ContatoInfoModel")
+                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.ContatoInfoModel", "IdAgente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgenteModel");
+                });
+
+            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.DocumentoModel", b =>
+                {
+                    b.HasOne("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModel")
+                        .WithOne("DocumentoModel")
+                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.DocumentoModel", "IdAgente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgenteModel");
+                });
+
+            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.EnderecoModel", b =>
+                {
+                    b.HasOne("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModel")
+                        .WithOne("EnderecoModel")
+                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.EnderecoModel", "IdAgente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgenteModel");
+                });
+
+            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.PessoaFisicaModel", b =>
+                {
+                    b.HasOne("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModel")
+                        .WithOne("PessoaFisicaModel")
+                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.PessoaFisicaModel", "IdAgenteModel")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgenteModel");
                 });
 
             modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.AgenteModel", b =>
                 {
-                    b.HasOne("MikeCars.Infraestructure.Repository.Models.ContatoInfoModel", "ContatoInfoModel")
-                        .WithOne("AgenteModel")
-                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikeCars.Infraestructure.Repository.Models.DocumentoModel", "DocumentoModel")
-                        .WithOne("AgenteModel")
-                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikeCars.Infraestructure.Repository.Models.EnderecoModel", "EnderecoModel")
-                        .WithOne("AgenteModel")
-                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikeCars.Infraestructure.Repository.Models.PessoaFisicaModel", "PessoaFisicaModel")
-                        .WithOne("AgenteModel")
-                        .HasForeignKey("MikeCars.Infraestructure.Repository.Models.AgenteModel", "AgenteModeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ContatoInfoModel");
 
                     b.Navigation("DocumentoModel");
@@ -241,30 +281,6 @@ namespace MikeCars.Infraestructure.Repository.Migrations
                     b.Navigation("EnderecoModel");
 
                     b.Navigation("PessoaFisicaModel");
-                });
-
-            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.ContatoInfoModel", b =>
-                {
-                    b.Navigation("AgenteModel")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.DocumentoModel", b =>
-                {
-                    b.Navigation("AgenteModel")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.EnderecoModel", b =>
-                {
-                    b.Navigation("AgenteModel")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MikeCars.Infraestructure.Repository.Models.PessoaFisicaModel", b =>
-                {
-                    b.Navigation("AgenteModel")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

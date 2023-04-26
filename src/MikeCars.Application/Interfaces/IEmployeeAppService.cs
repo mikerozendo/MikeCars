@@ -6,4 +6,5 @@ namespace MikeCars.Application.Interfaces;
 public interface IEmployeeAppService
 {
     Task<IActionResult> Create(EmployeeViewModel employeeViewModel);
+    Task<IActionResult> Get();
 }

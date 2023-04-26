@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MikeCars.Infraestructure.Repository.Models;
+using System.Data.Common;
 
 namespace MikeCars.Infraestructure.Repository.Context;
 
@@ -10,6 +12,7 @@ public class AppDbContext : DbContext
     {
         ChangeTracker.AutoDetectChangesEnabled = false;
     }
+
     public AppDbContext()
     {
         ChangeTracker.AutoDetectChangesEnabled = false;
@@ -23,77 +26,80 @@ public class AppDbContext : DbContext
     public DbSet<EnderecoModel> Enderecos { get; set; }
     public DbSet<ContatoInfoModel> ContatoInfo { get; set; }
 
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=MikeCars;User ID=sa;Password=123@Mudar;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=MikeCars;User ID=sa;Password=123@Mudar;TrustServerCertificate=True",
+            b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
         #region AgenteModel
-        modelBuilder.Entity<AgenteModel>()
-            .ToTable("t-agente");
 
         modelBuilder.Entity<AgenteModel>()
-            .HasKey(x => x.AgenteModeId)
-            .HasName("pk-agente");
+            .ToTable("Agente");
 
         modelBuilder.Entity<AgenteModel>()
-            .Property(x => x.AgenteModeId)
-            .HasColumnName("id")
+            .HasKey(x => x.AgenteModelId)
+            .HasName("pkAgente");
+
+        modelBuilder.Entity<AgenteModel>()
+            .Property(x => x.AgenteModelId)
+            .HasColumnName("Id")
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<AgenteModel>()
-            .HasIndex(x => x.AgenteModeId)
-            .HasDatabaseName("idx-agente");
+            .HasIndex(x => x.AgenteModelId)
+            .HasDatabaseName("idxAgente");
 
         modelBuilder.Entity<AgenteModel>()
             .Property(x => x.IdTipoAgente)
-            .HasColumnType("int")
-            .HasColumnName("id-tipo-agente")
+            .HasColumnName("IdTipoAgente")
             .IsRequired();
 
         modelBuilder.Entity<AgenteModel>()
-            .Property(x => x.IdContatoInfoModel)
-            .HasColumnType("int")
-            .HasColumnName("id-contato-info");
+            .Property(x => x.IdContatoinfoModel)
+            .HasColumnName("IdContatoInfo");
 
         modelBuilder.Entity<AgenteModel>()
             .Property(x => x.IdDocumentoModel)
-            .HasColumnType("int")
-            .HasColumnName("id-documento");
+            .HasColumnName("IdDocumento");
 
         modelBuilder.Entity<AgenteModel>()
             .Property(x => x.IdEnderecoModel)
+            .HasColumnName("IdEndereco");
+
+        modelBuilder.Entity<AgenteModel>()
+            .Property(x => x.IdPessoaFisicaModel)
             .HasColumnType("int")
-            .HasColumnName("id-endereco");
+            .IsRequired(false);
 
         modelBuilder.Entity<AgenteModel>()
             .HasOne(x => x.DocumentoModel)
             .WithOne(x => x.AgenteModel)
-            .HasForeignKey<DocumentoModel>(x => x.DocumentoModelId)
+            .HasForeignKey<AgenteModel>(x => x.IdDocumentoModel)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<AgenteModel>()
             .HasOne(x => x.EnderecoModel)
             .WithOne(x => x.AgenteModel)
-            .HasForeignKey<EnderecoModel>(x => x.EnderecoModelId)
+            .HasForeignKey<AgenteModel>(x => x.IdEnderecoModel)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<AgenteModel>()
             .HasOne(x => x.ContatoInfoModel)
             .WithOne(x => x.AgenteModel)
-            .HasForeignKey<ContatoInfoModel>(x => x.ContatoInfoModelId)
+            .HasForeignKey<AgenteModel>(x => x.IdContatoinfoModel)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<AgenteModel>()
             .HasOne(x => x.PessoaFisicaModel)
             .WithOne(x => x.AgenteModel)
-            .HasForeignKey<PessoaFisicaModel>(x => x.PessoaFisicaModelId)
+            .HasForeignKey<AgenteModel>(x => x.IdPessoaFisicaModel)
             .OnDelete(DeleteBehavior.Cascade);
 
         //modelBuilder.Entity<AgenteModel>()
@@ -106,38 +112,45 @@ public class AppDbContext : DbContext
         #region PessoaFisicaModel
 
         modelBuilder.Entity<PessoaFisicaModel>()
-            .ToTable("t-pessoa-fisica");
+            .ToTable("PessoaFisica");
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .HasKey(x => x.PessoaFisicaModelId)
-            .HasName("id-pessoa");
+            .HasName("IdPessoa");
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .Property(x => x.PessoaFisicaModelId)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .HasIndex(x => x.PessoaFisicaModelId)
-            .HasDatabaseName("dx-pessoa-fisica");
+            .HasDatabaseName("idxpessoafisica");
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .Property(x => x.Nascimento)
             .HasColumnType("datetime")
-            .HasColumnName("nascimento")
+            .HasColumnName("Nascimento")
             .IsRequired();
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .Property(x => x.Nome)
             .HasColumnType("varchar")
+            .HasMaxLength(100)
+            .HasColumnName("Nome")
+            .IsRequired();
+
+        modelBuilder.Entity<PessoaFisicaModel>()
+            .Property(x => x.Sobrenome)
+            .HasColumnType("varchar")
             .HasMaxLength(300)
-        .HasColumnName("nome")
+            .HasColumnName("Sobrenome")
             .IsRequired();
 
         modelBuilder.Entity<PessoaFisicaModel>()
             .HasOne(x => x.AgenteModel)
             .WithOne(x => x.PessoaFisicaModel)
-            .HasForeignKey<AgenteModel>(x => x.AgenteModeId)
+            .HasForeignKey<PessoaFisicaModel>(x => x.IdAgenteModel)
             .OnDelete(DeleteBehavior.Cascade);
 
         #endregion
@@ -145,46 +158,46 @@ public class AppDbContext : DbContext
         #region DocumentoModel
 
         modelBuilder.Entity<DocumentoModel>()
-            .ToTable("t-documento");
+            .ToTable("Documento");
 
         modelBuilder.Entity<DocumentoModel>()
             .HasKey(x => x.DocumentoModelId)
-            .HasName("pk-documento");
+            .HasName("PkDocumento");
 
         modelBuilder.Entity<DocumentoModel>()
             .HasIndex(x => x.DocumentoModelId)
-            .HasDatabaseName("idx-id-documento");
+            .HasDatabaseName("idxiddocumento");
 
         modelBuilder.Entity<DocumentoModel>()
             .Property(x => x.DocumentoModelId)
-            .HasColumnName("id");
+            .HasColumnName("Id");
 
         modelBuilder.Entity<DocumentoModel>()
             .HasIndex(x => x.Numero)
-            .HasDatabaseName("idx-numero-documento");
+            .HasDatabaseName("idxnumerodocumento");
 
         modelBuilder.Entity<DocumentoModel>()
             .Property(x => x.IdTipoDocumento)
             .HasColumnType("int")
-            .HasColumnName("id-tipo-documento")
+            .HasColumnName("IdTipoDocumento")
             .IsRequired();
 
         modelBuilder.Entity<DocumentoModel>()
             .Property(x => x.Numero)
             .HasColumnType("varchar")
             .HasMaxLength(15)
-            .HasColumnName("documento")
+            .HasColumnName("Numero")
             .IsRequired();
 
         modelBuilder.Entity<DocumentoModel>()
             .Property(x => x.IdAgente)
             .HasColumnType("int")
-            .HasColumnName("id-agente");
+            .HasColumnName("IdAgente");
 
         modelBuilder.Entity<DocumentoModel>()
             .HasOne(x => x.AgenteModel)
             .WithOne(x => x.DocumentoModel)
-            .HasForeignKey<AgenteModel>(x => x.AgenteModeId)
+            .HasForeignKey<DocumentoModel>(x => x.IdAgente)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
 
@@ -192,109 +205,110 @@ public class AppDbContext : DbContext
 
         #region EnderecoModel
         modelBuilder.Entity<EnderecoModel>()
-            .ToTable("t-endereco");
+            .ToTable("Endereco");
 
         modelBuilder.Entity<EnderecoModel>()
             .HasKey(x => x.EnderecoModelId)
-            .HasName("pk-endereco");
+            .HasName("pkendereco");
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.EnderecoModelId)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.Logradouro)
             .HasColumnType("varchar")
-            .HasColumnName("logradouro")
+            .HasMaxLength(150)
+            .HasColumnName("Logradouro")
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.Bairro)
             .HasColumnType("varchar")
-            .HasColumnName("bairro")
-            .HasMaxLength(45)
+            .HasColumnName("Bairro")
+            .HasMaxLength(150)
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.Cidade)
             .HasColumnType("varchar")
-            .HasColumnName("cidade")
+            .HasColumnName("Cidade")
             .HasMaxLength(150)
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.IdTipoEndereco)
             .HasColumnType("int")
-            .HasColumnName("id-tipo-endereco");
+            .HasColumnName("IdTipoEndereco");
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.Numero)
             .HasColumnType("varchar")
-            .HasColumnName("numero")
-            .HasMaxLength(10)
+            .HasMaxLength(20)
+            .HasColumnName("Numero")
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.PontoReferencia)
             .HasColumnType("varchar")
-            .HasColumnName("ponto-referencia")
+            .HasColumnName("PontoReferencia")
             .HasMaxLength(225)
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .Property(x => x.Uf)
             .HasColumnType("varchar")
-            .HasColumnName("uf")
+            .HasColumnName("Uf")
             .HasMaxLength(2)
             .IsRequired(false);
 
         modelBuilder.Entity<EnderecoModel>()
             .HasOne(x => x.AgenteModel)
             .WithOne(x => x.EnderecoModel)
-            .HasForeignKey<AgenteModel>(x => x.AgenteModeId)
+            .HasForeignKey<EnderecoModel>(x => x.IdAgente)
             .OnDelete(DeleteBehavior.Cascade);
         #endregion
 
         #region ContatoInfoModel
 
         modelBuilder.Entity<ContatoInfoModel>()
-            .ToTable("t-contato-info");
+            .ToTable("ContatoInfo");
 
         modelBuilder.Entity<ContatoInfoModel>()
             .HasKey(x => x.ContatoInfoModelId)
-            .HasName("pk-contato-info");
+            .HasName("PkContatoInfo");
 
         modelBuilder.Entity<ContatoInfoModel>()
             .Property(x => x.ContatoInfoModelId)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<ContatoInfoModel>()
             .Property(x => x.Email)
             .HasColumnType("varchar")
-            .HasColumnName("email")
+            .HasColumnName("Email")
             .HasMaxLength(25)
             .IsRequired(false);
 
         modelBuilder.Entity<ContatoInfoModel>()
             .Property(x => x.TelefoneCelular)
             .HasColumnType("varchar")
-            .HasColumnName("celular")
+            .HasColumnName("Celular")
             .HasMaxLength(20)
             .IsRequired(false);
 
         modelBuilder.Entity<ContatoInfoModel>()
             .Property(x => x.TelefoneResidencial)
             .HasColumnType("varchar")
-            .HasColumnName("telefone-residencia")
+            .HasColumnName("TelefoneResidencial")
             .HasMaxLength(20)
             .IsRequired(false);
 
         modelBuilder.Entity<ContatoInfoModel>()
             .HasOne(x => x.AgenteModel)
             .WithOne(x => x.ContatoInfoModel)
-            .HasForeignKey<AgenteModel>(x => x.AgenteModeId)
+            .HasForeignKey<ContatoInfoModel>(x => x.IdAgente)
             .OnDelete(DeleteBehavior.Cascade);
         #endregion
 
@@ -302,12 +316,12 @@ public class AppDbContext : DbContext
 
         //modelBuilder.Entity<PessoaJuridicaModel>()
         //    .HasKey(x => x.Id)
-        //    .HasName("pk-pessoa-juridica");
+        //    .HasName("pkpessoajuridica");
 
         //modelBuilder.Entity<PessoaJuridicaModel>()
         //    .Property(x => x.Id)
         //    .HasColumnType("int")
-        //    .HasColumnName("id")
+        //    .HasColumnName("Id")
         //    .ValueGeneratedOnAdd();
 
         //modelBuilder.Entity<PessoaJuridicaModel>()
@@ -319,14 +333,14 @@ public class AppDbContext : DbContext
         //modelBuilder.Entity<PessoaJuridicaModel>()
         //    .Property(x => x.RazaoSocial)
         //    .HasColumnType("varchar")
-        //    .HasColumnName("razao-social")
+        //    .HasColumnName("razaosocial")
         //    .HasMaxLength(225)
         //    .IsRequired();
 
         //modelBuilder.Entity<PessoaJuridicaModel>()
         //    .Property(x => x.NomeFantasia)
         //    .HasColumnType("varchar")
-        //    .HasColumnName("nome-fantasia")
+        //    .HasColumnName("nomefantasia")
         //    .HasMaxLength(225)
         //    .IsRequired();
 
@@ -347,38 +361,38 @@ public class AppDbContext : DbContext
         #region RepresentanteModel
 
         //modelBuilder.Entity<RepresentanteModel>()
-        //    .ToTable("t-representante");
+        //    .ToTable("trepresentante");
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .HasKey(x => x.Id)
-        //    .HasName("pk-representante");
+        //    .HasName("pkrepresentante");
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .HasIndex(x => x.Id)
-        //    .HasDatabaseName("idx-representante")
+        //    .HasDatabaseName("idxrepresentante")
         //    .IsUnique();
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .HasIndex(x => x.PessoaJuridicaModelId)
-        //    .HasDatabaseName("idx-representante-pessoa-juridica-id");
+        //    .HasDatabaseName("idxrepresentantepessoajuridicaid");
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .HasIndex(x => x.PessoaFisicaModelId)
-        //    .HasDatabaseName("idx-representante-pessoa-fisica-id");
+        //    .HasDatabaseName("idxrepresentantepessoafisicaid");
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .Property(x => x.Id)
-        //    .HasColumnName("id")
+        //    .HasColumnName("Id")
         //    .ValueGeneratedOnAdd();
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .Property(x => x.PessoaFisicaModelId)
-        //    .HasColumnName("id-pessoa-fisica")
+        //    .HasColumnName("idpessoafisica")
         //    .ValueGeneratedOnAdd();
 
         //modelBuilder.Entity<RepresentanteModel>()
         //    .Property(x => x.PessoaJuridicaModelId)
-        //    .HasColumnName("id-pessoa-juridica")
+        //    .HasColumnName("idpessoajuridica")
         //    .ValueGeneratedOnAdd();
 
         //modelBuilder.Entity<RepresentanteModel>()

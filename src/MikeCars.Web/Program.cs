@@ -23,9 +23,7 @@ builder.Services.AddScoped<IPessoaFisicaRepository, PessoaFisicaRepository>();
 builder.Services.AddScoped<IDocumentoRepository, DocumentoRepository>();
 
 
-builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseSqlServer(dbConnection, 
-    b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+builder.Services.AddDbContext<AppDbContext>();
 
 var app = builder.Build();
 
