@@ -13,7 +13,6 @@ public static class EmployeeMapper
         {
             Admissao = employeeViewModel.ContractStartDate,
             Demissao = employeeViewModel.ContractEndDate,
-            //Ativo = true;
             Nascimento = employeeViewModel.BirthDate,
             Salario = employeeViewModel.SalaryAmount,
             Nome = employeeViewModel.FirstName,
@@ -29,7 +28,8 @@ public static class EmployeeMapper
                 Cidade = employeeViewModel.City,
                 Logradouro = employeeViewModel.Street,
                 Numero = employeeViewModel.StreetNumber,
-                PontoReferencia = employeeViewModel.AdressReferencePoint
+                PontoReferencia = employeeViewModel.AdressReferencePoint,
+                Cep = employeeViewModel.State
             },
         };
 

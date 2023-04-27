@@ -7,14 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="dbup-core" Version="5.0.10" />
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MikeCars.Application\MikeCars.Application.csproj" />
     <ProjectReference Include="..\..\MikeCars.Domain\MikeCars.Domain.csproj" />
+    <ProjectReference Include="..\MikeCars.Infraestructure.Repository\MikeCars.Infraestructure.Repository.csproj" />
   </ItemGroup>
 
 </Project>

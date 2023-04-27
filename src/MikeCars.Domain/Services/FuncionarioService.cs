@@ -1,6 +1,5 @@
 ﻿using FluentResults;
 using MikeCars.Domain.Entities;
-using MikeCars.Domain.Extentions;
 using MikeCars.Domain.Interfaces.Repositories;
 using MikeCars.Domain.Interfaces.Services;
 
@@ -8,31 +7,40 @@ namespace MikeCars.Domain.Services;
 
 public class FuncionarioService : IFuncionarioService
 {
-
-    private readonly IPessoaFisicaService _pessoaFisicaService;
+    private readonly IDocumentoRepository _documentoRepository;
     private readonly IFuncionarioRepository _funcionarioRepository;
 
-    public FuncionarioService(IPessoaFisicaService pessoaFisicaService, IFuncionarioRepository funcionarioRepository)
+    public FuncionarioService(IDocumentoRepository documentoRepository, IFuncionarioRepository funcionarioRepository)
     {
-        _pessoaFisicaService = pessoaFisicaService;
+        _documentoRepository = documentoRepository;
         _funcionarioRepository = funcionarioRepository;
     }
 
     public async Task<Result> Create(Funcionario employee)
     {
-        var personResult = await _pessoaFisicaService.CreateAsync(employee);
-        var employeeResult = await _funcionarioRepository.Create(employee);
-        if (personResult.IsSuccess)
+        try
         {
-            //CreAte employee in db;
+            employee.Documento.Builder();
 
-            return Result.Ok();
+            if (employee.Documento.Valido)
+            {
+                var documentoExiste = await _documentoRepository.AlreadyExistsAsync(employee.Documento);
+
+                if (!documentoExiste)
+                {
+                    await _funcionarioRepository.Create(employee);
+                    return Result.Ok();
+                }
+            }
+
+            return Result.Fail("Por favor, informe um documento valido!");
         }
-        else
+        catch (Exception ex)
         {
-            var error = personResult.GetErrorMessage();
-            return Result.Fail(error);  
+
+            return Result.Fail($"Falha ao tentar cadastrar funcionario. {ex}");
         }
+
     }
 
     public Task<Result> Get()

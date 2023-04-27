@@ -12,15 +12,21 @@ public class Funcionario : PessoaFisica
     public DepartamentoEmpresa DepartamentoEmpresa { get; private set; }
 
 
-    public Funcionario(EnumTipoFuncionario enumTipoFuncionario,EnumDepartamentoEmpresa enumDepartamentoEmpresa,string numeroDocumento) 
+    public Funcionario(EnumTipoFuncionario enumTipoFuncionario, EnumDepartamentoEmpresa enumDepartamentoEmpresa, string numeroDocumento)
         : base(EnumTipoAgente.Funcionario, EnumTipoDocumento.CPF, numeroDocumento)
     {
         EnumTipoFuncionario = enumTipoFuncionario;
         DepartamentoEmpresa = new(enumDepartamentoEmpresa);
+        DefineAtivo();
     }
 
     public void DefiniFerias()
     {
         FeriasSinteticoInfo = new(this);
+    }
+
+    private void DefineAtivo()
+    {
+        Ativo = Demissao is not null;
     }
 }

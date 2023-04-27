@@ -4,5 +4,5 @@ namespace MikeCars.Domain.Interfaces.Repositories;
 
 public interface IFuncionarioRepository
 {
-    Task<int> Create(Funcionario funcionario);
+    Task Create(Funcionario funcionario);
 }

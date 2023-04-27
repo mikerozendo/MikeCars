@@ -14,21 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="dbup-core" Version="5.0.10" />
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MikeCars.Application\MikeCars.Application.csproj" />
+    <ProjectReference Include="..\MikeCars.Infraestructure\MikeCars.Infraestructure.CrossCutting\MikeCars.Infraestructure.CrossCutting.csproj" />
     <ProjectReference Include="..\MikeCars.Infraestructure\MikeCars.Infraestructure.Repository\MikeCars.Infraestructure.Repository.csproj" />
   </ItemGroup>
 
